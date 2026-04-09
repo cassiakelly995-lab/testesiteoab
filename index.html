@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OAB SP - Painel do Advogado | Assistente Especialista</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -13,184 +13,272 @@
                 extend: {
                     colors: {
                         oab: {
-                            dark: '#0a1628',
-                            navy: '#1e3a5f',
-                            gold: '#c9a961',
-                            light: '#f8f9fa',
-                            accent: '#2c5282'
+                            primary: '#0f2b4d',
+                            secondary: '#1e4d7a',
+                            accent: '#c9a227',
+                            light: '#f3f6f8',
+                            dark: '#0a1a2e',
+                            text: '#2c3e50',
+                            muted: '#5a6c7d'
                         }
                     },
                     fontFamily: {
-                        serif: ['Cinzel', 'serif'],
-                        sans: ['Inter', 'sans-serif']
+                        sans: ['Segoe UI', 'system-ui', 'sans-serif'],
+                        serif: ['Crimson Pro', 'Georgia', 'serif']
                     }
                 }
             }
         }
     </script>
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 50%, #0f2744 100%);
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #f3f6f8;
+            color: #2c3e50;
         }
-        .gold-gradient {
-            background: linear-gradient(135deg, #c9a961 0%, #e0c989 50%, #c9a961 100%);
+        .ms-header {
+            background: linear-gradient(135deg, #0f2b4d 0%, #1e4d7a 100%);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .ms-card {
+            background: #ffffff;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+            transition: all 0.2s ease;
         }
-        .chat-message {
-            animation: slideIn 0.3s ease-out;
+        .ms-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .ms-button-primary {
+            background: #c9a227;
+            color: #0f2b4d;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 2px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        .ms-button-primary:hover {
+            background: #b8941f;
+            box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
         }
-        .typing-indicator span {
-            animation: blink 1.4s infinite both;
+        .ms-button-secondary {
+            background: transparent;
+            color: #0f2b4d;
+            border: 1px solid #0f2b4d;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 2px;
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes blink {
-            0%, 100% { opacity: 0.2; }
+        .ms-button-secondary:hover {
+            background: rgba(15, 43, 77, 0.05);
+        }
+        .ms-input {
+            border: 1px solid #d1d5db;
+            border-radius: 2px;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .ms-input:focus {
+            outline: none;
+            border-color: #1e4d7a;
+            box-shadow: 0 0 0 3px rgba(30, 77, 122, 0.1);
+        }
+        .ms-sidebar-item {
+            padding: 14px 20px;
+            color: #5a6c7d;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ms-sidebar-item:hover, .ms-sidebar-item.active {
+            background: rgba(15, 43, 77, 0.04);
+            color: #0f2b4d;
+            border-left-color: #c9a227;
+        }
+        .ms-sidebar-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .chat-bubble {
+            max-width: 85%;
+            padding: 16px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .chat-user {
+            background: #0f2b4d;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+        .chat-ai {
+            background: #ffffff;
+            border: 1px solid #e1e4e8;
+            color: #2c3e50;
+            border-bottom-left-radius: 0;
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
+        .section-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .stat-number {
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 300;
+            font-size: 32px;
+            color: #0f2b4d;
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e1e4e8, transparent);
+            margin: 24px 0;
+        }
         .search-highlight {
-            background-color: #fef3c7;
+            background: #fff3cd;
             padding: 2px 4px;
-            border-radius: 4px;
+            border-radius: 2px;
+        }
+        .response-list {
+            list-style: none;
+            padding: 0;
+        }
+        .response-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            border-bottom: 1px solid #f3f6f8;
+        }
+        .response-list li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #c9a227;
+            font-weight: 600;
+        }
+        .response-list li:last-child {
+            border-bottom: none;
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="min-h-screen">
 
     <!-- Header -->
-    <header class="gradient-bg text-white sticky top-0 z-50 shadow-2xl">
-        <div class="container mx-auto px-4 py-3">
+    <header class="ms-header text-white sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <i class="fas fa-balance-scale text-oab-dark text-2xl"></i>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-white rounded-sm flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-oab-primary text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="font-serif text-2xl font-bold tracking-wide">OAB SP</h1>
-                        <p class="text-xs text-oab-gold uppercase tracking-wider">Ordem dos Advogados do Brasil - Seção São Paulo</p>
+                        <h1 class="text-xl font-semibold tracking-tight">OAB SP</h1>
+                        <p class="text-xs text-gray-300 uppercase tracking-wider">Ordem dos Advogados do Brasil - Seção São Paulo</p>
                     </div>
                 </div>
                 
-                <div class="hidden md:flex items-center space-x-6">
+                <div class="hidden md:flex items-center gap-6">
                     <div class="text-right">
-                        <p class="text-sm font-semibold">Dr. Advogado Exemplo</p>
+                        <p class="text-sm font-medium">Dr. Advogado Exemplo</p>
                         <p class="text-xs text-gray-300">OAB/SP 123.456</p>
                     </div>
-                    <div class="relative">
-                        <img src="https://ui-avatars.com/api/?name=Advogado&background=c9a961&color=fff" class="w-10 h-10 rounded-full border-2 border-oab-gold cursor-pointer hover:scale-110 transition">
-                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-oab-dark"></div>
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-oab-primary font-semibold text-sm">
+                        AE
                     </div>
                 </div>
-                
-                <button class="md:hidden text-white text-2xl" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden gradient-bg text-white p-4">
-        <div class="space-y-4">
-            <a href="#" class="block py-2 border-b border-gray-700"><i class="fas fa-home mr-2"></i> Início</a>
-            <a href="#" class="block py-2 border-b border-gray-700"><i class="fas fa-user mr-2"></i> Meu Perfil</a>
-            <a href="#" class="block py-2 border-b border-gray-700"><i class="fas fa-cog mr-2"></i> Configurações</a>
-            <a href="#" class="block py-2 text-red-400"><i class="fas fa-sign-out-alt mr-2"></i> Sair</a>
-        </div>
-    </div>
-
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-6 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <!-- Sidebar Navigation -->
-            <aside class="lg:col-span-3 space-y-4">
-                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-oab-gold">
-                    <h3 class="font-serif text-lg font-bold text-oab-dark mb-4">Menu Rápido</h3>
-                    <nav class="space-y-2">
-                        <a href="#" class="flex items-center p-3 rounded-lg bg-oab-dark text-white hover:bg-oab-navy transition">
-                            <i class="fas fa-th-large w-6"></i>
-                            <span class="font-medium">Dashboard</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-id-card w-6 text-oab-gold"></i>
+            <!-- Sidebar -->
+            <aside class="lg:col-span-3">
+                <div class="ms-card p-2">
+                    <div class="px-4 py-3 border-b border-gray-100">
+                        <h3 class="text-xs font-semibold text-oab-muted uppercase tracking-wider">Menu Principal</h3>
+                    </div>
+                    <nav>
+                        <div class="ms-sidebar-item active">
+                            <i class="fas fa-th-large"></i>
+                            <span>Dashboard</span>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-id-card"></i>
                             <span>Carteira Digital</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-file-alt w-6 text-oab-gold"></i>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-file-alt"></i>
                             <span>Certidões</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-gavel w-6 text-oab-gold"></i>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-gavel"></i>
                             <span>Processos</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-book w-6 text-oab-gold"></i>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-book"></i>
                             <span>Biblioteca Jurídica</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-calendar-alt w-6 text-oab-gold"></i>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-calendar-alt"></i>
                             <span>Eventos</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-graduation-cap w-6 text-oab-gold"></i>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-graduation-cap"></i>
                             <span>ESA Cursos</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-users w-6 text-oab-gold"></i>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-users"></i>
                             <span>Comissões</span>
-                        </a>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
-                            <i class="fas fa-heart w-6 text-oab-gold"></i>
+                        </div>
+                        <div class="ms-sidebar-item">
+                            <i class="fas fa-heart"></i>
                             <span>CAASP</span>
-                        </a>
+                        </div>
                     </nav>
                 </div>
 
-                <!-- Quick Stats -->
-                <div class="bg-gradient-to-br from-oab-dark to-oab-navy rounded-xl shadow-lg p-6 text-white">
-                    <h4 class="font-serif text-oab-gold mb-4">Seus Números</h4>
+                <div class="ms-card mt-4 p-6">
+                    <h4 class="text-xs font-semibold text-oab-muted uppercase tracking-wider mb-4">Resumo da Conta</h4>
                     <div class="space-y-4">
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-300">Processos Ativos</span>
-                            <span class="text-2xl font-bold text-white">24</span>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-sm text-oab-muted">Processos Ativos</span>
+                            <span class="stat-number">24</span>
                         </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2">
-                            <div class="bg-oab-gold h-2 rounded-full" style="width: 75%"></div>
+                        <div class="w-full bg-gray-100 h-1 rounded-full">
+                            <div class="bg-oab-accent h-1 rounded-full" style="width: 75%"></div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-300">Consultas Hoje</span>
-                            <span class="text-2xl font-bold text-white">3</span>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-sm text-oab-muted">Consultas Hoje</span>
+                            <span class="stat-number">3</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-300">Cursos ESA</span>
-                            <span class="text-2xl font-bold text-white">12h</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Presidente OAB SP -->
-                <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-oab-gold">
-                    <h4 class="font-serif text-oab-dark mb-3">Presidente OAB SP</h4>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
-                            <img src="https://via.placeholder.com/64/c9a961/ffffff?text=PV" alt="Patricia Vanzolini" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <p class="font-bold text-oab-dark text-sm">Patricia Vanzolini</p>
-                            <p class="text-xs text-gray-600">1ª Mulher Presidente</p>
-                            <p class="text-xs text-oab-gold">Gestão 2022-2025</p>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-sm text-oab-muted">Horas ESA</span>
+                            <span class="stat-number">12</span>
                         </div>
                     </div>
                 </div>
@@ -199,199 +287,221 @@
             <!-- Main Content -->
             <main class="lg:col-span-9 space-y-6">
                 
-                <!-- Welcome Banner -->
-                <div class="gradient-bg rounded-2xl p-8 text-white relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
-                    <div class="relative z-10">
-                        <h2 class="font-serif text-3xl font-bold mb-2">Bem-vindo, Dr. Advogado</h2>
-                        <p class="text-gray-300 mb-6">Acesso rápido aos principais serviços da OAB SP e assistência jurídica especializada.</p>
-                        <div class="flex flex-wrap gap-4">
-                            <button onclick="openChat()" class="gold-gradient text-oab-dark px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition flex items-center">
-                                <i class="fas fa-robot mr-2"></i>
-                                Consultar Dra. Themis
+                <!-- Welcome Section -->
+                <div class="ms-card p-8 bg-gradient-to-r from-oab-primary to-oab-secondary text-white">
+                    <div class="max-w-2xl">
+                        <h2 class="section-title text-3xl mb-3">Bem-vindo, Dr. Advogado</h2>
+                        <p class="text-gray-200 mb-6 text-sm leading-relaxed">
+                            Acesso integrado aos serviços da OAB SP. Consulte documentos, certidões, 
+                            cursos e obtenha assistência especializada através do sistema inteligente.
+                        </p>
+                        <div class="flex gap-3">
+                            <button onclick="openAssistant()" class="ms-button-primary">
+                                Consultar Assistente
                             </button>
-                            <button class="bg-white bg-opacity-20 backdrop-blur px-6 py-3 rounded-lg font-semibold hover:bg-opacity-30 transition">
-                                <i class="fas fa-calendar mr-2"></i>
-                                Agendar Consulta
+                            <button class="ms-button-secondary text-white border-white hover:bg-white hover:text-oab-primary">
+                                Agendar Atendimento
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Search Knowledge Base -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="font-serif text-xl font-bold text-oab-dark mb-4 flex items-center">
-                        <i class="fas fa-search text-oab-navy mr-2"></i>
-                        Buscar no Conhecimento OAB SP
-                    </h3>
+                <!-- Search Knowledge -->
+                <div class="ms-card p-6">
+                    <h3 class="section-title text-xl mb-4 text-oab-primary">Base de Conhecimento OAB SP</h3>
                     <div class="relative">
-                        <input type="text" id="kbSearch" placeholder="Ex: 'Comissão de Direito Digital', 'ENJA 2026', 'Precatório'..." 
-                               class="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:outline-none focus:border-oab-navy focus:ring-2 focus:ring-oab-navy focus:ring-opacity-20"
+                        <input type="text" 
+                               id="kbSearch" 
+                               placeholder="Pesquisar em toda a base de dados: comissões, cursos, procedimentos, legislação..." 
+                               class="ms-input pl-12"
                                onkeyup="searchKnowledgeBase()">
                         <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     </div>
-                    <div id="searchResults" class="mt-4 hidden">
-                        <!-- Results will appear here -->
-                    </div>
+                    <div id="searchResults" class="mt-4 hidden"></div>
                 </div>
 
                 <!-- Services Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100 cursor-pointer transition-all duration-300" onclick="showServiceDetail('inscricao')">
-                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-user-plus text-oab-navy text-2xl"></i>
+                    <div class="ms-card p-6 cursor-pointer" onclick="showServiceDetail('inscricao')">
+                        <div class="w-12 h-12 bg-blue-50 rounded-sm flex items-center justify-center mb-4">
+                            <i class="fas fa-user-plus text-oab-primary text-lg"></i>
                         </div>
-                        <h3 class="font-bold text-lg text-oab-dark mb-2">Inscrição</h3>
-                        <p class="text-sm text-gray-600">Subseções, segunda via de carteira, alteração de dados e atualização cadastral.</p>
+                        <h3 class="font-semibold text-oab-primary mb-2">Inscrição</h3>
+                        <p class="text-sm text-oab-muted leading-relaxed">
+                            Subseções, segunda via de carteira, alteração de dados cadastrais e transferências.
+                        </p>
                     </div>
 
-                    <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100 cursor-pointer transition-all duration-300" onclick="showServiceDetail('certidoes')">
-                        <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-certificate text-yellow-700 text-2xl"></i>
+                    <div class="ms-card p-6 cursor-pointer" onclick="showServiceDetail('certidoes')">
+                        <div class="w-12 h-12 bg-yellow-50 rounded-sm flex items-center justify-center mb-4">
+                            <i class="fas fa-certificate text-yellow-600 text-lg"></i>
                         </div>
-                        <h3 class="font-bold text-lg text-oab-dark mb-2">Certidões</h3>
-                        <p class="text-sm text-gray-600">Certidão de inscrição, regularidade, débitos e situação cadastral atualizada.</p>
+                        <h3 class="font-semibold text-oab-primary mb-2">Certidões</h3>
+                        <p class="text-sm text-oab-muted leading-relaxed">
+                            Certidão de inscrição, regularidade, situação de débitos e negativa.
+                        </p>
                     </div>
 
-                    <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100 cursor-pointer transition-all duration-300" onclick="showServiceDetail('prec')">
-                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-money-check-alt text-green-700 text-2xl"></i>
+                    <div class="ms-card p-6 cursor-pointer" onclick="showServiceDetail('prec')">
+                        <div class="w-12 h-12 bg-green-50 rounded-sm flex items-center justify-center mb-4">
+                            <i class="fas fa-money-check-alt text-green-600 text-lg"></i>
                         </div>
-                        <h3 class="font-bold text-lg text-oab-dark mb-2">PREC</h3>
-                        <p class="text-sm text-gray-600">Pagamento de precatórios, consulta de valores e agendamento de recebimento.</p>
+                        <h3 class="font-semibold text-oab-primary mb-2">Precatórios</h3>
+                        <p class="text-sm text-oab-muted leading-relaxed">
+                            Sistema PREC, consulta de valores, agendamento e recebimento de créditos.
+                        </p>
                     </div>
 
-                    <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100 cursor-pointer transition-all duration-300" onclick="showServiceDetail('comissoes')">
-                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-users text-purple-700 text-2xl"></i>
+                    <div class="ms-card p-6 cursor-pointer" onclick="showServiceDetail('comissoes')">
+                        <div class="w-12 h-12 bg-purple-50 rounded-sm flex items-center justify-center mb-4">
+                            <i class="fas fa-users text-purple-600 text-lg"></i>
                         </div>
-                        <h3 class="font-bold text-lg text-oab-dark mb-2">Comissões</h3>
-                        <p class="text-sm text-gray-600">40+ comissões temáticas, direitos humanos e prerrogativas.</p>
+                        <h3 class="font-semibold text-oab-primary mb-2">Comissões</h3>
+                        <p class="text-sm text-oab-muted leading-relaxed">
+                            Mais de 40 comissões temáticas, direitos humanos e defesa das prerrogativas.
+                        </p>
                     </div>
 
-                    <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100 cursor-pointer transition-all duration-300" onclick="showServiceDetail('beneficios')">
-                        <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-heart text-red-700 text-2xl"></i>
+                    <div class="ms-card p-6 cursor-pointer" onclick="showServiceDetail('beneficios')">
+                        <div class="w-12 h-12 bg-red-50 rounded-sm flex items-center justify-center mb-4">
+                            <i class="fas fa-heart text-red-600 text-lg"></i>
                         </div>
-                        <h3 class="font-bold text-lg text-oab-dark mb-2">Benefícios</h3>
-                        <p class="text-sm text-gray-600">CAASP, previdência, assistência médica, odontológica e farmácia.</p>
+                        <h3 class="font-semibold text-oab-primary mb-2">Benefícios CAASP</h3>
+                        <p class="text-sm text-oab-muted leading-relaxed">
+                            Assistência médica, odontológica, farmácia, seguros e previdência privada.
+                        </p>
                     </div>
 
-                    <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100 cursor-pointer transition-all duration-300" onclick="showServiceDetail('esa')">
-                        <div class="w-14 h-14 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-graduation-cap text-indigo-700 text-2xl"></i>
+                    <div class="ms-card p-6 cursor-pointer" onclick="showServiceDetail('esa')">
+                        <div class="w-12 h-12 bg-indigo-50 rounded-sm flex items-center justify-center mb-4">
+                            <i class="fas fa-graduation-cap text-indigo-600 text-lg"></i>
                         </div>
-                        <h3 class="font-bold text-lg text-oab-dark mb-2">ESA</h3>
-                        <p class="text-sm text-gray-600">Cursos de especialização, pós-graduação, eventos e certificações.</p>
+                        <h3 class="font-semibold text-oab-primary mb-2">ESA</h3>
+                        <p class="text-sm text-oab-muted leading-relaxed">
+                            Cursos de especialização, MBA, pós-graduações e programas de certificação.
+                        </p>
                     </div>
                 </div>
 
                 <!-- AI Assistant Section -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-                    <div class="gradient-bg p-6 text-white flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                                <i class="fas fa-balance-scale text-oab-dark text-3xl"></i>
+                <div class="ms-card overflow-hidden">
+                    <div class="bg-oab-primary text-white p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 bg-white rounded-sm flex items-center justify-center">
+                                    <i class="fas fa-brain text-oab-primary text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title text-2xl">Assistente Virtual Especialista</h3>
+                                    <p class="text-sm text-gray-300 mt-1">
+                                        Base completa: Comissões, Eventos, ESA, CAASP, Legislação, Procedimentos
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="font-serif text-2xl font-bold">Dra. Themis</h3>
-                                <p class="text-oab-gold text-sm">Assistente Virtual Especialista OAB SP</p>
-                                <p class="text-xs text-gray-300 mt-1">Base completa: Comissões, Eventos, ESA, CAASP, Legislação...</p>
+                            <div class="hidden md:block text-right text-sm text-gray-300">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                                    <span>Sistema Online</span>
+                                </div>
+                                <div>400.000+ consultas processadas</div>
                             </div>
-                        </div>
-                        <div class="hidden md:flex items-center space-x-2 text-sm">
-                            <span class="flex items-center"><i class="fas fa-circle text-green-400 mr-1 text-xs"></i> Online</span>
-                            <span class="text-gray-400">|</span>
-                            <span>Base: Site OAB SP completo</span>
                         </div>
                     </div>
                     
                     <div class="p-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <h4 class="font-bold text-oab-dark mb-4 flex items-center">
-                                    <i class="fas fa-star text-oab-gold mr-2"></i>
-                                    Perguntas sobre o Site OAB SP
+                                <h4 class="font-semibold text-oab-primary mb-4 text-sm uppercase tracking-wide">
+                                    Consultas Frequentes
                                 </h4>
-                                <div class="space-y-3 max-h-96 overflow-y-auto" id="faqList">
-                                    <!-- FAQs will be populated by JS -->
-                                </div>
+                                <div class="space-y-2" id="faqList"></div>
                             </div>
                             
-                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                                <div id="quickResponse" class="h-full flex flex-col justify-center items-center text-center p-4">
-                                    <i class="fas fa-robot text-4xl text-oab-navy mb-3 opacity-50"></i>
-                                    <p class="text-gray-500 text-sm">Clique em uma pergunta ao lado ou digite sua dúvida sobre qualquer serviço da OAB SP</p>
+                            <div class="bg-oab-light rounded-sm p-6 border border-gray-200">
+                                <div id="quickResponse" class="h-full flex flex-col justify-center items-center text-center">
+                                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
+                                        <i class="fas fa-robot text-oab-muted text-2xl"></i>
+                                    </div>
+                                    <p class="text-oab-muted text-sm max-w-xs">
+                                        Selecione uma consulta ao lado ou utilize o campo abaixo para perguntas específicas sobre qualquer serviço da OAB SP.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="mt-6 flex gap-2">
-                            <input type="text" id="customQuestion" placeholder="Digite sua dúvida sobre qualquer serviço OAB SP..." class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-oab-navy focus:ring-2 focus:ring-oab-navy focus:ring-opacity-20">
-                            <button onclick="askCustomQuestion()" class="gold-gradient text-oab-dark px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                                <i class="fas fa-paper-plane"></i>
+                        <div class="divider"></div>
+                        
+                        <div class="flex gap-3">
+                            <input type="text" 
+                                   id="customQuestion" 
+                                   placeholder="Digite sua consulta sobre serviços, procedimentos ou normas da OAB SP..." 
+                                   class="ms-input flex-1"
+                                   onkeypress="handleCustomKeypress(event)">
+                            <button onclick="askCustomQuestion()" class="ms-button-primary">
+                                Consultar
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Legislação e Jurisprudência -->
+                <!-- Legal Resources -->
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-oab-navy">
-                        <h3 class="font-serif text-xl font-bold text-oab-dark mb-4 flex items-center">
-                            <i class="fas fa-book-open text-oab-navy mr-2"></i>
-                            Legislação em Destaque
-                        </h3>
+                    <div class="ms-card p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-oab-primary rounded-sm flex items-center justify-center">
+                                <i class="fas fa-book-open text-white"></i>
+                            </div>
+                            <h3 class="section-title text-xl text-oab-primary">Legislação em Destaque</h3>
+                        </div>
                         <ul class="space-y-3">
-                            <li class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition cursor-pointer">
-                                <i class="fas fa-external-link-alt text-oab-gold mt-1 mr-3 text-sm"></i>
-                                <div>
-                                    <p class="font-semibold text-sm text-oab-dark">Lei 14.382/2022</p>
-                                    <p class="text-xs text-gray-600">Altera o CPC sobre honorários advocatícios</p>
-                                </div>
+                            <li class="p-3 hover:bg-oab-light rounded-sm cursor-pointer transition border-l-2 border-transparent hover:border-oab-accent">
+                                <p class="font-semibold text-sm text-oab-primary">Lei 14.382/2022</p>
+                                <p class="text-xs text-oab-muted mt-1">Alterações no CPC relativas a honorários advocatícios</p>
                             </li>
-                            <li class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition cursor-pointer">
-                                <i class="fas fa-external-link-alt text-oab-gold mt-1 mr-3 text-sm"></i>
-                                <div>
-                                    <p class="font-semibold text-sm text-oab-dark">Lei 14.193/2021</p>
-                                    <p class="text-xs text-gray-600">LGPD - Lei Geral de Proteção de Dados</p>
-                                </div>
+                            <li class="p-3 hover:bg-oab-light rounded-sm cursor-pointer transition border-l-2 border-transparent hover:border-oab-accent">
+                                <p class="font-semibold text-sm text-oab-primary">Lei 14.193/2021</p>
+                                <p class="text-xs text-oab-muted mt-1">Lei Geral de Proteção de Dados Pessoais (LGPD)</p>
                             </li>
-                            <li class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition cursor-pointer">
-                                <i class="fas fa-external-link-alt text-oab-gold mt-1 mr-3 text-sm"></i>
-                                <div>
-                                    <p class="font-semibold text-sm text-oab-dark">EC 125/2022</p>
-                                    <p class="text-xs text-gray-600">Reforma Tributária - Emenda Constitucional</p>
-                                </div>
+                            <li class="p-3 hover:bg-oab-light rounded-sm cursor-pointer transition border-l-2 border-transparent hover:border-oab-accent">
+                                <p class="font-semibold text-sm text-oab-primary">EC 125/2022</p>
+                                <p class="text-xs text-oab-muted mt-1">Reforma Tributária - Emenda Constitucional</p>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-oab-gold">
-                        <h3 class="font-serif text-xl font-bold text-oab-dark mb-4 flex items-center">
-                            <i class="fas fa-gavel text-oab-gold mr-2"></i>
-                            Jurisprudência Recente
-                        </h3>
+                    <div class="ms-card p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-oab-accent rounded-sm flex items-center justify-center">
+                                <i class="fas fa-gavel text-white"></i>
+                            </div>
+                            <h3 class="section-title text-xl text-oab-primary">Jurisprudência Recente</h3>
+                        </div>
                         <ul class="space-y-3">
-                            <li class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition cursor-pointer">
-                                <span class="bg-oab-dark text-white text-xs px-2 py-1 rounded mr-3 mt-1">STF</span>
-                                <div>
-                                    <p class="font-semibold text-sm text-oab-dark">RE 1.234.567</p>
-                                    <p class="text-xs text-gray-600">Honorários sucumbência - Aplicação recursal</p>
+                            <li class="p-3 hover:bg-oab-light rounded-sm cursor-pointer transition">
+                                <div class="flex items-start gap-3">
+                                    <span class="bg-oab-primary text-white text-xs px-2 py-1 rounded-sm font-medium">STF</span>
+                                    <div>
+                                        <p class="font-semibold text-sm text-oab-primary">RE 1.234.567</p>
+                                        <p class="text-xs text-oab-muted mt-1">Honorários de sucumbência - Aplicação recursal</p>
+                                    </div>
                                 </div>
                             </li>
-                            <li class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition cursor-pointer">
-                                <span class="bg-oab-navy text-white text-xs px-2 py-1 rounded mr-3 mt-1">STJ</span>
-                                <div>
-                                    <p class="font-semibold text-sm text-oab-dark">REsp 1.876.543</p>
-                                    <p class="text-xs text-gray-600">Prescrição intercorrente em execução fiscal</p>
+                            <li class="p-3 hover:bg-oab-light rounded-sm cursor-pointer transition">
+                                <div class="flex items-start gap-3">
+                                    <span class="bg-oab-secondary text-white text-xs px-2 py-1 rounded-sm font-medium">STJ</span>
+                                    <div>
+                                        <p class="font-semibold text-sm text-oab-primary">REsp 1.876.543</p>
+                                        <p class="text-xs text-oab-muted mt-1">Prescrição intercorrente em execução fiscal</p>
+                                    </div>
                                 </div>
                             </li>
-                            <li class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition cursor-pointer">
-                                <span class="bg-oab-gold text-white text-xs px-2 py-1 rounded mr-3 mt-1">TJSP</span>
-                                <div>
-                                    <p class="font-semibold text-sm text-oab-dark">AI 1234567-89.2023</p>
-                                    <p class="text-xs text-gray-600">Responsabilidade civil do advogado</p>
+                            <li class="p-3 hover:bg-oab-light rounded-sm cursor-pointer transition">
+                                <div class="flex items-start gap-3">
+                                    <span class="bg-oab-accent text-white text-xs px-2 py-1 rounded-sm font-medium">TJSP</span>
+                                    <div>
+                                        <p class="font-semibold text-sm text-oab-primary">AI 1234567-89.2023</p>
+                                        <p class="text-xs text-oab-muted mt-1">Responsabilidade civil do advogado</p>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -402,52 +512,59 @@
         </div>
     </div>
 
-    <!-- Floating Chat Button -->
-    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-16 h-16 gold-gradient rounded-full shadow-2xl flex items-center justify-center text-oab-dark text-2xl hover:scale-110 transition-transform z-50 border-4 border-white">
-        <i class="fas fa-comments"></i>
+    <!-- Floating Assistant Button -->
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-oab-accent text-oab-primary rounded-sm shadow-lg flex items-center justify-center hover:bg-yellow-500 transition z-50">
+        <i class="fas fa-comments text-xl"></i>
     </button>
 
     <!-- Chat Modal -->
-    <div id="chatModal" class="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl hidden flex-col z-50 border border-gray-200 overflow-hidden">
-        <div class="gradient-bg p-4 text-white flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                    <i class="fas fa-balance-scale text-oab-dark"></i>
+    <div id="chatModal" class="fixed bottom-24 right-6 w-[420px] h-[580px] bg-white rounded-sm shadow-2xl hidden flex-col z-50 border border-gray-200">
+        <div class="bg-oab-primary text-white p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-sm flex items-center justify-center">
+                    <i class="fas fa-brain text-oab-primary"></i>
                 </div>
                 <div>
-                    <h4 class="font-bold text-sm">Dra. Themis</h4>
-                    <p class="text-xs text-oab-gold">Especialista OAB SP</p>
+                    <h4 class="font-semibold text-sm">Assistente Especialista</h4>
+                    <p class="text-xs text-gray-300">OAB SP - Base completa</p>
                 </div>
             </div>
-            <button onclick="toggleChat()" class="text-white hover:text-oab-gold">
+            <button onclick="toggleChat()" class="text-white hover:text-oab-accent">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         
         <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-            <div class="chat-message flex items-start space-x-2">
-                <div class="w-8 h-8 bg-oab-navy rounded-full flex items-center justify-center flex-shrink-0">
+            <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-oab-primary rounded-sm flex items-center justify-center flex-shrink-0">
                     <i class="fas fa-robot text-white text-xs"></i>
                 </div>
-                <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-[80%] text-sm">
-                    <p class="text-gray-800">Olá! Sou a Dra. Themis, especialista em TODO o site da OAB SP. Posso responder sobre:</p>
-                    <ul class="text-xs text-gray-600 mt-2 space-y-1">
-                        <li>• Todas as 40+ Comissões</li>
-                        <li>• Eventos (ENJA, Conferências)</li>
-                        <li>• Cursos ESA</li>
-                        <li>• 325 Subseções</li>
-                        <li>• CAASP e benefícios</li>
-                        <li>• Serviços e procedimentos</li>
+                <div class="chat-bubble chat-ai">
+                    <p class="mb-2">Prezado Dr.,</p>
+                    <p class="mb-2">Sou o assistente virtual especializado da OAB SP. Posso auxiliar nas seguintes áreas:</p>
+                    <ul class="response-list text-sm">
+                        <li>Inscrição e regularidade cadastral</li>
+                        <li>Certidões e documentação</li>
+                        <li>Sistema PREC e precatórios</li>
+                        <li>Comissões temáticas (40+ unidades)</li>
+                        <li>ESA - cursos e eventos</li>
+                        <li>CAASP - benefícios e assistência</li>
+                        <li>Prerrogativas profissionais</li>
+                        <li>Subseções e atendimento</li>
                     </ul>
-                    <p class="text-gray-800 mt-2">Como posso ajudar?</p>
+                    <p class="mt-2">Como posso ser útil?</p>
                 </div>
             </div>
         </div>
         
         <div class="p-4 bg-white border-t border-gray-200">
             <div class="flex gap-2">
-                <input type="text" id="chatInput" placeholder="Digite sua pergunta..." class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-oab-navy text-sm" onkeypress="handleChatKeypress(event)">
-                <button onclick="sendChatMessage()" class="gold-gradient text-oab-dark px-4 py-2 rounded-lg hover:shadow transition">
+                <input type="text" 
+                       id="chatInput" 
+                       placeholder="Digite sua consulta..." 
+                       class="ms-input flex-1 text-sm"
+                       onkeypress="handleChatKeypress(event)">
+                <button onclick="sendChatMessage()" class="ms-button-primary px-4">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
@@ -456,125 +573,604 @@
 
     <!-- Service Detail Modal -->
     <div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="gradient-bg p-6 text-white flex items-center justify-between sticky top-0">
-                <h3 id="serviceTitle" class="font-serif text-2xl font-bold"></h3>
-                <button onclick="closeServiceModal()" class="text-white hover:text-oab-gold text-2xl">
+        <div class="bg-white rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="bg-oab-primary text-white p-6 flex items-center justify-between sticky top-0">
+                <h3 id="serviceTitle" class="section-title text-2xl"></h3>
+                <button onclick="closeServiceModal()" class="text-white hover:text-oab-accent text-xl">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div id="serviceContent" class="p-6">
-                <!-- Content injected via JS -->
-            </div>
+            <div id="serviceContent" class="p-6"></div>
         </div>
     </div>
 
     <script>
-        // COMPLETE KNOWLEDGE BASE - OAB SP FULL SITE
+        // COMPLETE KNOWLEDGE BASE - PROFESSIONAL FORMAT
         const knowledgeBase = {
-            // INSCRIÇÃO E CARTEIRA
             "segunda via": {
                 keywords: ["segunda via", "carteira", "perdi", "roubaram", "extraviada", "nova carteira"],
-                response: "📋 **Segunda Via da Carteira OAB/SP**\n\n**Como solicitar:**\n1. Acesse o Portal da Advocacia (portal.oabsp.org.br)\n2. Serviços → Inscrição → 2ª Via de Carteira\n3. Taxa: R$ 102,00 (2026)\n4. Prazo: até 15 dias úteis\n\n**Documentos necessários:**\n- Boletim de ocorrência (se furto/roubo)\n- RG e CPF\n- Comprovante de residência atual\n- Foto 3x4 digital\n\n💡 **Dica:** A carteira digital está disponível imediatamente no app OAB SP após pagamento.\n\n**Endereço para retirada:**\nRua Maria Paula, 35 - Bela Vista, São Paulo/SP\nSegunda a sexta, 9h às 18h"
+                response: `SOLICITAÇÃO DE SEGUNDA VIA DA CARTEIRA OAB/SP
+
+Procedimento:
+1. Acesse o Portal da Advocacia (portal.oabsp.org.br)
+2. Navegue até: Serviços > Inscrição > 2ª Via de Carteira
+3. Efetue o pagamento da taxa: R$ 102,00 (valores 2026)
+4. Prazo de confecção: até 15 dias úteis
+
+Documentos necessários:
+— Boletim de ocorrência (em caso de furto ou roubo)
+— Documento de identidade (RG)
+— Cadastro de Pessoa Física (CPF)
+— Comprovante de residência atualizado
+— Fotografia 3x4 digital (fundo branco)
+
+Observação: A carteira digital fica disponível imediatamente no aplicativo OAB SP após confirmação do pagamento.
+
+Local para retirada:
+Rua Maria Paula, 35 - Bela Vista
+São Paulo/SP - CEP 01019-040
+Horário de atendimento: segunda a sexta-feira, 9h às 18h`
             },
             "anuidade": {
                 keywords: ["anuidade", "pagamento", "boleto", "vencimento", "débito", "cota"],
-                response: "💰 **Anuidade OAB SP 2026**\n\n**Valores:**\n- Advogado em exercício: R$ 1.248,00 (12x R$ 104,00)\n- Advogado não exercício: R$ 624,00\n- Estagiário: Isento\n\n**Descontos:**\n- Cota única até 31/03: 10% desconto\n- Cota única até 30/04: 5% desconto\n\n**Formas de pagamento:**\n- Portal da Advocacia (boleto/cartão)\n- App OAB SP (PIX)\n- Subseções (dinheiro/cartão)\n- Débito em conta CAASP\n\n⚠️ **Atenção:** Inadimplência > 180 dias = cancelamento da inscrição\n\n**Parcelamento:**\n- Até 10x sem juros (boleto)\n- Até 12x no cartão de crédito"
+                response: `ANUIDADE OAB SP - EXERCÍCIO 2026
+
+Valores:
+— Advogado em exercício: R$ 1.248,00 (parcelamento em até 12 vezes de R$ 104,00)
+— Advogado não exercício: R$ 624,00
+— Estagiário: Isento
+
+Descontos para pagamento à vista:
+— Cota única até 31/03/2026: 10% de desconto
+— Cota única até 30/04/2026: 5% de desconto
+
+Formas de pagamento:
+— Portal da Advocacia (boleto bancário ou cartão de crédito)
+— Aplicativo OAB SP (PIX)
+— Subseções (dinheiro ou cartão)
+— Débito automático em conta CAASP
+
+Parcelamento:
+— Boleto: até 10 parcelas sem juros
+— Cartão de crédito: até 12 parcelas
+
+Advertência: Inadimplência superior a 180 dias acarreta o cancelamento da inscrição junto à OAB SP.`
             },
             "inscricao": {
                 keywords: ["inscrever", "primeira inscricao", "novo advogado", "formei", "primeira vez"],
-                response: "🎓 **Primeira Inscrição OAB SP**\n\n**Requisitos:**\n- Aprovação no Exame de Ordem (FGV)\n- Diploma registrado na OAB\n- Certidão negativa criminal (federal)\n\n**Taxas 2026:**\n- Taxa de inscrição: R$ 510,00\n- 1ª anuidade proporcional ao mês\n\n**Documentos:**\n- Diploma de Direito (registrado)\n- RG e CPF\n- Comprovante de residência\n- Foto 3x4 digital\n\n**Escolha da Subseção:**\nSão Paulo possui **325 subseções**. Escolha conforme:\n- Endereço profissional, ou\n- Endereço residencial\n\n**Prazo:** 90 dias após aprovação no exame\n\n**Atendimento:** Agende pelo portal ou ligue 0800-770-5555"
+                response: `PRIMEIRA INSCRIÇÃO NA OAB SP
+
+Requisitos:
+— Aprovação no Exame de Ordem (validade: 5 anos)
+— Diploma de bacharel em Direito devidamente registrado
+— Certidão negativa criminal (justiça federal)
+
+Documentos necessários:
+— Diploma de graduação em Direito (registrado na OAB)
+— Documento de identidade (RG)
+— Cadastro de Pessoa Física (CPF)
+— Comprovante de residência
+— Fotografia 3x4 digital (fundo branco)
+— Certidão negativa criminal federal
+
+Taxas (2026):
+— Taxa de inscrição: R$ 510,00
+— Primeira anuidade proporcional ao mês de inscrição
+
+Escolha da subseção:
+A OAB SP possui 325 subseções distribuídas entre a capital e o interior do estado. A escolha deve observar:
+— Endereço profissional, ou
+— Endereço residencial
+
+Prazo: 90 dias contados da data de aprovação no Exame de Ordem
+
+Central de Atendimento: 0800-770-5555`
             },
             "transferencia": {
                 keywords: ["transferencia", "mudar subsecao", "mudar cidade", "transferir"],
-                response: "🔄 **Transferência de Subseção**\n\n**Quando solicitar:**\n- Mudança de endereço profissional\n- Mudança de endereço residencial\n- Preferência por outra subseção\n\n**Como funciona:**\n1. Acesse Portal da Advocacia\n2. Serviços → Inscrição → Transferência\n3. Selecione nova subseção\n4. Pague taxa de R$ 51,00\n\n**Prazo:** Até 10 dias úteis\n\n**Documentos:**\n- Novo comprovante de residência ou\n- Contrato social do novo escritório\n\n⚠️ **Importante:** A transferência não altera o número de inscrição na OAB, apenas a subseção de vinculação."
+                response: `TRANSFERÊNCIA DE SUBSEÇÃO
+
+Situações que ensejam transferência:
+— Alteração do endereço profissional
+— Alteração do endereço residencial
+— Preferência por subseção de melhor acesso
+
+Procedimento:
+1. Acesse o Portal da Advocacia
+2. Selecione: Serviços > Inscrição > Transferência de Subseção
+3. Indique a nova subseção de destino
+4. Efetue o pagamento da taxa: R$ 51,00
+5. Prazo de processamento: até 10 dias úteis
+
+Documentação:
+— Novo comprovante de residência, ou
+— Contrato social do novo escritório de advocacia, ou
+— Declaração de trabalho em novo local
+
+Observação importante: A transferência de subseção não altera o número de inscrição do advogado na OAB, mantendo a mesma numeração nacional.`
             },
-            
-            // PRECATÓRIOS
             "precatorio": {
                 keywords: ["precatorio", "prec", "receber", "pagamento", "agendar", "sistema prec"],
-                response: "💵 **Sistema PREC - Precatórios OAB SP**\n\n**O que é:**\nPrograma de Regularização de Pagamentos - recebimento antecipado de créditos advocatícios.\n\n**Como funciona:**\n- Desconto de até 40% sobre o valor de face\n- Pagamento à vista (PIX, DOC, TED)\n- Agendamento obrigatório\n\n**Passo a passo:**\n1. Consulte disponibilidade no sistema PREC\n2. Simule o valor líquido\n3. Agende data para recebimento\n4. Compareça com documentos:\n   - RG e CPF\n   - Carteira OAB\n   - Procuração (se representante)\n\n**Contato PREC:**\n📞 (11) 3298-5000 (ramal PREC)\n📧 prec@oabsp.org.br\n📍 Rua Maria Paula, 35 - 1º subsolo\n\n**Horário:** Seg-Sex, 9h às 16h"
+                response: `SISTEMA PREC - PROGRAMA DE REGULARIZAÇÃO DE PAGAMENTOS
+
+Conceito:
+Programa que permite o recebimento antecipado de créditos advocatícios mediante desconto sobre o valor de face.
+
+Características:
+— Desconto de até 40% sobre o valor de face
+— Pagamento à vista mediante PIX, DOC ou TED
+— Agendamento prévio obrigatório
+
+Procedimento:
+1. Consulte disponibilidade de crédito no sistema PREC
+2. Realize simulação do valor líquido a receber
+3. Efetue agendamento para data de recebimento
+4. Compareça no local com documentação:
+   — Documento de identidade (RG)
+   — Cadastro de Pessoa Física (CPF)
+   — Carteira da OAB
+   — Procuração (quando representante)
+
+Contato do sistema PREC:
+Telefone: (11) 3298-5000 (ramal PREC)
+E-mail: prec@oabsp.org.br
+Endereço: Rua Maria Paula, 35 - 1º subsolo
+Horário de atendimento: segunda a sexta-feira, 9h às 16h`
             },
-            
-            // COMISSÕES
             "comissoes": {
                 keywords: ["comissao", "comissoes", "participar", "direitos humanos", "tema"],
-                response: "👥 **Comissões da OAB SP**\n\nA OAB SP possui **mais de 40 comissões temáticas**:\n\n**Principais Comissões:**\n• Direitos Humanos\n• Direito Digital e Proteção de Dados\n• Direito da Infância e Juventude\n• Direito Empresarial\n• Direito Tributário\n• Direito do Trabalho\n• Direito Previdenciário\n• Direito Médico e da Saúde\n• Direito Ambiental\n• Prerrogativas e Defesa das Advocacias\n\n**Como participar:**\n1. Acesse o site oabsp.org.br\n2. Menu \"Comissões\"\n3. Escolha a comissão de interesse\n4. Clique em \"Candidatar-se\"\n\n**Requisitos:**\n- Estar inscrito na OAB SP há mais de 2 anos\n- Não ter sofrido sanção ética\n- Disponibilidade para reuniões mensais\n\n**Presidente:** Cada comissão tem coordenação eleita por 2 anos."
+                response: `COMISSÕES DA OAB SP
+
+A OAB SP mantém mais de 40 comissões temáticas permanentes, entre as quais:
+
+Principais comissões:
+— Direitos Humanos
+— Direito Digital e Proteção de Dados
+— Direito da Infância e Juventude
+— Direito Empresarial
+— Direito Tributário
+— Direito do Trabalho
+— Direito Previdenciário
+— Direito Médico e da Saúde
+— Direito Ambiental
+— Prerrogativas e Defesa das Advocacias
+
+Processo de participação:
+1. Acesse o site institucional (oabsp.org.br)
+2. Navegue até o menu Comissões
+3. Selecione a comissão de interesse
+4. Clique em Candidatar-se
+
+Requisitos para participação:
+— Inscrição na OAB SP há mais de 2 anos
+— Ausência de sanção ética
+— Disponibilidade para reuniões mensais
+— Compromisso com as atividades propostas
+
+Gestão: Cada comissão possui coordenação eleita para mandato de 2 anos.`
             },
             "direito digital": {
                 keywords: ["direito digital", "lgpd", "protecao dados", "internet", "tecnologia"],
-                response: "💻 **Comissão de Direito Digital e Proteção de Dados**\n\n**Coordenador:** Dr. [Nome atual]\n\n**Atuação:**\n- LGPD (Lei 14.193/2021)\n- Crimes cibernéticos\n- Contratos de tecnologia\n- Propriedade intelectual digital\n- Blockchain e criptoativos\n\n**Grupos de Trabalho:**\n• Privacidade e Proteção de Dados\n• Cibersegurança\n• Inteligência Artificial\n• E-commerce\n\n**Eventos:**\n- Encontro Anual de Direito Digital\n- Cursos ESA especializados\n- Webinars mensais\n\n**Contato:** comissaodireitodigital@oabsp.org.br"
+                response: `COMISSÃO DE DIREITO DIGITAL E PROTEÇÃO DE DADOS
+
+Áreas de atuação:
+— Lei Geral de Proteção de Dados (Lei 14.193/2021)
+— Crimes cibernéticos e investigação digital
+— Contratos de tecnologia e software
+— Propriedade intelectual em ambiente digital
+— Blockchain e regulamentação de criptoativos
+— Inteligência artificial e responsabilidade algorítmica
+
+Grupos de trabalho permanentes:
+1. Privacidade e Proteção de Dados Pessoais
+2. Cibersegurança e Resposta a Incidentes
+3. Inteligência Artificial e Ética Computacional
+4. Comércio Eletrônico e Plataformas Digitais
+
+Eventos regulares:
+— Encontro Anual de Direito Digital
+— Cursos de especialização ESA
+— Webinars mensais (transmissão gratuita)
+
+Contato institucional:
+E-mail: comissaodireitodigital@oabsp.org.br`
             },
-            
-            // CAASP
             "caasp": {
                 keywords: ["caasp", "beneficios", "saude", "odontologia", "farmacia", "seguro"],
-                response: "❤️ **CAASP - Caixa de Assistência dos Advogados**\n\n**Benefícios disponíveis:**\n\n🏥 **Saúde:**\n- Plano de saúde com coparticipação reduzida\n- Rede credenciada nacional\n- Pronto-atendimento 24h\n\n🦷 **Odontologia:**\n- Plano odontológico completo\n- Ortodontia inclusa\n- Implantes com desconto\n\n💊 **Farmácia:**\n- Descontos de até 70% em medicamentos\n- Rede Drogasil, Pague Menos, etc.\n\n🛡️ **Seguros:**\n- Vida (morte natural/acidental)\n- Responsabilidade Civil Profissional\n- Seguro de escritório\n\n💰 **Previdência Privada:**\n- Plano Viver CAASP\n- Contribuição flexível\n- Benefício fiscal\n\n**Adesão:**\n📞 0800-770-5555\n💻 www.caasp.org.br"
+                response: `CAASP - CAIXA DE ASSISTÊNCIA DOS ADVOGADOS DE SÃO PAULO
+
+Benefícios disponíveis:
+
+Assistência Médica:
+— Plano de saúde com coparticipação reduzida
+— Rede credenciada nacional
+— Pronto-atendimento 24 horas
+— Cobertura para consultas, exames e internações
+
+Assistência Odontológica:
+— Plano odontológico completo
+— Cobertura de ortodontia
+— Implantes dentários com descontos especiais
+— Atendimento em rede credenciada
+
+Programa de Farmácia:
+— Descontos de até 70% em medicamentos
+— Rede conveniada: Drogasil, Pague Menos, Droga Raia, entre outras
+
+Seguros:
+— Seguro de vida (cobertura por morte natural ou acidental)
+— Seguro de responsabilidade civil profissional
+— Seguro de escritório e equipamentos
+
+Previdência Privada:
+— Plano Viver CAASP
+— Contribuição flexível conforme capacidade
+— Benefícios fiscais conforme legislação vigente
+
+Adesão:
+Site: www.caasp.org.br
+Telefone: 0800-770-5555`
             },
-            
-            // ESA
             "esa": {
                 keywords: ["esa", "curso", "pos", "mba", "especializacao", "aula"],
-                response: "🎓 **ESA - Escola Superior de Advocacia**\n\n**Cursos disponíveis:**\n\n**Pós-Graduações (360h):**\n- MBA em Direito Digital e LGPD\n- Direito Tributário Avançado\n- Direito Empresarial e Societário\n- Processo Civil e Execução\n\n**Especializações (180h):**\n- Direito do Consumidor\n- Direito Médico\n- Direito Imobiliário\n- Direito Desportivo\n\n**Cursos Livres (20-40h):**\n- Atualizações legislativas\n- Prática forense\n- Soft skills para advogados\n\n**Eventos ESA:**\n- Congresso Anual\n- Jornadas Jurídicas\n- Workshops práticos\n\n**Descontos:**\n- 20% para advogados em dia\n- 50% para estagiários\n- Isenção para comissões OAB\n\n📞 (11) 3298-5200\n📍 Rua Maria Paula, 35 - 2º andar"
+                response: `ESA - ESCOLA SUPERIOR DE ADVOCACIA
+
+Programas de pós-graduação (360 horas):
+— MBA em Direito Digital e Proteção de Dados
+— Direito Tributário Avançado
+— Direito Empresarial e Societário
+— Processo Civil e Execução
+— Direito do Trabalho e Previdenciário
+
+Especializações (180 horas):
+— Direito do Consumidor
+— Direito Médico e da Saúde
+— Direito Imobiliário e Urbanístico
+— Direito Desportivo
+— Direito Ambiental
+
+Cursos livres (20 a 40 horas):
+— Atualizações legislativas
+— Prática forense e técnicas processuais
+— Desenvolvimento de soft skills para advogados
+— Tecnologia aplicada à advocacia
+
+Eventos institucionais:
+— Congresso Anual da Advocacia
+— Jornadas Jurídicas Regionais
+— Workshops práticos e laboratoriais
+
+Condições especiais:
+— 20% de desconto para advogados em dia com a anuidade
+— 50% de desconto para estagiários
+— Isenção de taxa para membros de comissões OAB
+
+Contato:
+Telefone: (11) 3298-5200
+Endereço: Rua Maria Paula, 35 - 2º andar`
             },
             "enja": {
                 keywords: ["enja", "encontro nacional", "jovens advogados", "evento jovem"],
-                response: "🌟 **ENJA SP - Encontro Nacional de Jovens Advogados**\n\n**Próxima edição:** ENJA SP 2026\n\n**Público-alvo:**\nAdvogados com até 10 anos de inscrição na OAB\n\n**Programação típica:**\n- Palestras com ministros e desembargadores\n- Workshops de carreira\n- Rodadas de negócios\n- Concurso de teses\n- Networking\n\n**Inscrição:**\n- Aberta para todo o Brasil\n- Desconto para inscrição antecipada\n- Certificado de participação\n\n**Histórico:**\nO ENJA é o maior evento para jovens advogados da América Latina, promovido anualmente pela OAB SP.\n\n**Contato:** enja@oabsp.org.br"
+                response: `ENJA SP - ENCONTRO NACIONAL DE JOVENS ADVOGADOS DE SÃO PAULO
+
+Próxima edição: ENJA SP 2026 (datas a serem divulgadas)
+
+Público-alvo:
+Advogados com até 10 anos de inscrição na OAB
+
+Programação típica:
+— Conferências com ministros dos tribunais superiores e desembargadores
+— Workshops de desenvolvimento de carreira
+— Rodadas de negócios entre escritórios
+— Concurso de teses e trabalhos acadêmicos
+— Sessões de networking estruturado
+
+Inscrição:
+— Aberta para advogados de todo o território nacional
+— Desconto para inscrição antecipada
+— Certificado de participação válido para carga horária de formação
+
+Relevância:
+O ENJA constitui o maior evento destinado a jovens advogados da América Latina, promovido anualmente pela OAB SP.
+
+Contato:
+E-mail: enja@oabsp.org.br`
             },
-            
-            // EVENTOS
             "eventos": {
                 keywords: ["evento", "calendario", "palestra", "workshop", "congresso"],
-                response: "📅 **Calendário de Eventos OAB SP**\n\n**Principais Eventos Anuais:**\n\n• **Outorga de Carteiras** - Mensal\n• **ENJA SP** - Anual (maior evento para jovens advogados)\n• **Conferências Regionais** - Trimestrais\n• **Jogos da Advocacia** - Anual\n• **Congresso da Advocacia Paulista** - Anual\n\n**Como se inscrever:**\n1. Acesse oabsp.org.br/eventos\n2. Escolha o evento\n3. Faça login com CPF e senha do Portal\n4. Confirme presença\n\n**Certificados:**\nTodos os eventos OAB SP emitem certificado de participação válido para carga horária ESA.\n\n**Transmissões:**\nMuitos eventos são transmitidos ao vivo pelo YouTube OAB SP."
+                response: `CALENDÁRIO DE EVENTOS OAB SP
+
+Principais eventos anuais:
+
+Outorga de Carteiras:
+— Realização: mensal
+— Cerimônia de entrega de carteiras de identidade profissional
+
+ENJA SP:
+— Realização: anual
+— Maior evento para jovens advogados da América Latina
+
+Conferências Regionais da Advocacia:
+— Realização: trimestral
+— Eventos descentralizados no interior paulista
+
+Jogos da Advocacia:
+— Realização: anual
+— Competições esportivas entre advogados
+
+Congresso da Advocacia Paulista:
+— Realização: anual
+— Evento científico com palestras nacionais e internacionais
+
+Procedimento de inscrição:
+1. Acesse o site institucional (oabsp.org.br/eventos)
+2. Selecione o evento desejado
+3. Efetue login com CPF e senha do Portal da Advocacia
+4. Confirme a participação
+
+Certificação:
+Todos os eventos promovidos pela OAB SP emit certificado de participação, válido para carga horária de formação continuada junto à ESA.
+
+Transmissões:
+Maioria dos eventos disponibiliza transmissão ao vivo pelo canal oficial da OAB SP no YouTube.`
             },
             "outorga": {
                 keywords: ["outorga", "entrega carteira", "cerimonia", "solene"],
-                response: "⚖️ **Solenidade de Outorga de Carteiras**\n\n**O que é:**\nCerimônia oficial de entrega das carteiras de identidade profissional aos novos advogados.\n\n**Como participar:**\n1. Após aprovação no Exame de Ordem\n2. Complete inscrição na OAB SP\n3. Aguarde convite para a cerimônia\n4. Confirme presença pelo Portal\n\n**Local:**\nAuditório da OAB SP\nRua Maria Paula, 35 - Bela Vista\n\n**Dress code:**\nTraje formal (terno completo para homens, terno ou vestido social para mulheres)\n\n**Duração:**\nAproximadamente 2 horas\n\n**Importante:**\nA presença é obrigatória para recebimento físico da carteira (exceto em casos de força maior)."
+                response: `SOLENIDADE DE OUTORGA DE CARTEIRAS
+
+Descrição:
+Cerimônia oficial de entrega das carteiras de identidade profissional aos novos advogados inscritos na OAB SP.
+
+Participação:
+— Disponível para aprovados no Exame de Ordem que concluíram o processo de inscrição
+— Convite enviado via Portal da Advocacia
+— Confirmação de presença obrigatória pelo sistema
+
+Local:
+Auditório da OAB SP
+Rua Maria Paula, 35 - Bela Vista
+São Paulo/SP
+
+Dress code:
+— Masculino: traje formal completo (terno e gravata)
+— Feminino: terno ou vestido social
+
+Duração estimada:
+Aproximadamente 2 horas
+
+Observação importante:
+A presença física é obrigatória para o recebimento da carteira, exceto em casos de força maior devidamente comprovados, nos quais a entrega poderá ser realizada em horário alternativo mediante agendamento prévio.`
             },
-            
-            // PRERROGATIVAS
             "prerrogativas": {
                 keywords: ["prerrogativas", "direitos", "privilegios", "advogado", "atuação", "estatuto"],
-                response: "⚖️ **Prerrogativas Profissionais - Estatuto da Advocacia (Lei 8.906/94)**\n\n**Inviolabilidade (Art. 7º):**\nO advogado é inviolável por seus atos e manifestações no exercício da profissão, na forma da lei.\n\n**Acesso Irrestrito (Art. 7º, II):**\n- Acesso a todos os órgãos jurisdicionais\n- Entrevistar clientes presos a qualquer hora\n- Acesso a autos de processos sigilosos\n\n**Sigilo Profissional (Art. 7º, V):**\nInviolável o sigilo entre advogado e cliente, mesmo após encerramento do caso.\n\n**Prerrogativas em Audiência:**\n- Preferência de fala\n- Impunibilidade por manifestações contra magistrados/partes\n- Direito a permanecer sentado\n- Acesso à sala de audiências\n\n**Imunidades:**\n- Não pode ser preso civilmente\n- Imune a ações por opinião técnica\n\n**Violação:**\nDenuncie à Comissão de Prerrogativas:\n📞 (11) 3298-5000\n📧 prerrogativas@oabsp.org.br"
+                response: `PRERROGATIVAS PROFISSIONAIS DO ADVOGADO
+Base legal: Lei 8.906/1994 (Estatuto da Advocacia)
+
+Inviolabilidade profissional (Art. 7º):
+O advogado é inviolável por seus atos e manifestações no exercício da profissão, na forma da lei.
+
+Acesso irrestrito (Art. 7º, II):
+— Acesso a todos os órgãos jurisdicionais administrativos
+— Entrevista com clientes presos a qualquer hora
+— Acesso a autos de processos em segredo de justiça
+
+Sigilo profissional (Art. 7º, V):
+Inviolável o sigilo entre advogado e cliente, mesmo após o encerramento do vínculo contratual ou da causa.
+
+Prerrogativas em audiência:
+— Preferência de fala nas discussões
+— Impunibilidade por manifestações contra magistrados, partes ou testemunhas
+— Direito de permanecer sentado durante os debates
+— Acesso privilegiado às salas de audiência
+
+Imunidades:
+— Impossibilidade de prisão civil
+— Imunidade em relação a ações por opinião técnica manifestada
+
+Denúncia de violação:
+Comissão de Prerrogativas da OAB SP
+Telefone: (11) 3298-5000
+E-mail: prerrogativas@oabsp.org.br`
             },
-            
-            // SUBSEÇÕES
             "subsecoes": {
                 keywords: ["subsecao", "subsecoes", "endereco", "interior", "capital"],
-                response: "🏢 **Subseções da OAB SP**\n\nA OAB SP possui **325 subseções** distribuídas em:\n\n**Capital e Grande SP:**\n- São Paulo (Sede)\n- Santo André\n- São Bernardo do Campo\n- São Caetano do Sul\n- Osasco\n- Guarulhos\n- Diadema\n- Mauá\n- etc.\n\n**Interior:**\n- Campinas\n- Ribeirão Preto\n- São José do Rio Preto\n- Sorocaba\n- Santos\n- Bauru\n- Marília\n- Presidente Prudente\n- etc.\n\n**Atendimento nas Subseções:**\n- Segunda a sexta: 9h às 18h\n- Serviços: inscrição, certidões, protocolos\n\n**Encontre sua subseção:**\n💻 oabsp.org.br/subsecoes\n📞 0800-770-5555"
+                response: `SUBSEÇÕES DA OAB SP
+
+Total de unidades: 325 subseções
+
+Distribuição geográfica:
+
+Capital e Região Metropolitana:
+— São Paulo (Sede institucional)
+— Santo André
+— São Bernardo do Campo
+— São Caetano do Sul
+— Osasco
+— Guarulhos
+— Diadema
+— Mauá
+— Barueri
+— E demais municípios da Grande São Paulo
+
+Interior do Estado:
+— Campinas
+— Ribeirão Preto
+— São José do Rio Preto
+— Sorocaba
+— Santos
+— Bauru
+— Marília
+— Presidente Prudente
+— São José dos Campos
+— E mais de 315 outras unidades
+
+Atendimento nas subseções:
+— Horário: segunda a sexta-feira, 9h às 18h
+— Serviços disponíveis: inscrição, certidões, protocolos de petições
+
+Localização:
+Consulte a subseção mais próxima em:
+oabsp.org.br/subsecoes
+
+Central de informações: 0800-770-5555`
             },
-            
-            // BIBLIOTECA
             "biblioteca": {
                 keywords: ["biblioteca", "livro", "doutrina", "pesquisa", "jurisprudencia"],
-                response: "📚 **Biblioteca Jurídica OAB SP**\n\n**Acervo:**\n- 50.000+ volumes\n- Periódicos jurídicos nacionais e internacionais\n- Bases de dados digitais\n\n**Serviços:**\n- Consulta local (gratuito)\n- Empréstimo (advogados inscritos)\n- Pesquisa online\n- Sala de estudos\n\n**Bases de Dados Disponíveis:**\n- JusBrasil\n- LexML\n- STF/STJ/TST/TJSP\n- Diários Oficiais\n\n**Local:**\nRua Maria Paula, 35 - 3º andar\nSão Paulo/SP\n\n**Horário:**\nSegunda a sexta: 9h às 20h\nSábado: 9h às 13h\n\n📞 (11) 3298-5300"
+                response: `BIBLIOTECA JURÍDICA DA OAB SP
+
+Acervo:
+— Mais de 50.000 volumes
+— Periódicos jurídicos nacionais e internacionais
+— Bases de dados digitais especializadas
+
+Serviços oferecidos:
+— Consulta local (gratuita)
+— Empréstimo domiciliar (exclusivo para advogados inscritos)
+— Pesquisa online em bases de dados
+— Salas de estudo individual e em grupo
+
+Bases de dados disponíveis:
+— JusBrasil
+— LexML (Legislação e Jurisprudência)
+— Repositórios do STF, STJ, TST e TJSP
+— Diários Oficiais (União, Estado e Municípios)
+
+Localização:
+Rua Maria Paula, 35 - 3º andar
+São Paulo/SP
+
+Horário de funcionamento:
+— Segunda a sexta-feira: 9h às 20h
+— Sábado: 9h às 13h
+
+Contato:
+Telefone: (11) 3298-5300`
             },
-            
-            // OUVIDORIA
             "ouvidoria": {
                 keywords: ["ouvidoria", "reclamacao", "sugestao", "elogio", "denuncia"],
-                response: "📞 **Ouvidoria OAB SP**\n\n**Canais de Atendimento:**\n\n📧 E-mail: ouvidoria@oabsp.org.br\n📞 Telefone: (11) 3298-5000 (ramal ouvidoria)\n🌐 Online: portal.oabsp.org.br/ouvidoria\n\n**Horário:**\nSegunda a sexta: 9h às 18h\n\n**Manifestações aceitas:**\n- Reclamações sobre serviços\n- Sugestões de melhorias\n- Elogios\n- Denúncias éticas (encaminhadas à Corregedoria)\n\n**Prazo de resposta:**\nAté 15 dias úteis\n\n**Sigilo:**\nTodas as manifestações são sigilosas."
+                response: `OUVIDORIA DA OAB SP
+
+Canais de atendimento:
+
+E-mail: ouvidoria@oabsp.org.br
+
+Telefone: (11) 3298-5000 (ramal ouvidoria)
+
+Formulário online: portal.oabsp.org.br/ouvidoria
+
+Horário de atendimento:
+Segunda a sexta-feira: 9h às 18h
+
+Tipos de manifestações aceitas:
+— Reclamações sobre serviços prestados
+— Sugestões de melhorias institucionais
+— Elogios e reconhecimentos
+— Denúncias éticas (encaminhadas à Corregedoria)
+
+Prazo de resposta:
+Até 15 dias úteis, conforme complexidade da demanda
+
+Sigilo:
+Todas as manifestações são tratadas com sigilo absoluto, garantindo a proteção da identidade do manifestante quando solicitado.`
             },
-            
-            // CORREGEDORIA
             "corregedoria": {
                 keywords: ["corregedoria", "processo etico", "sindicancia", "advogado", "conduta"],
-                response: "⚖️ **Corregedoria Geral da OAB SP**\n\n**Atribuições:**\n- Processos éticos contra advogados\n- Sindicâncias\n- Orientação sobre conduta profissional\n\n**Como denunciar:**\n1. Acesse portal.oabsp.org.br\n2. Serviços → Corregedoria → Denúncia\n3. Preencha formulário\n4. Anexe documentos\n\n**Estatística:**\nA OAB SP realiza mais de 20.000 processos éticos por ano.\n\n**Contato:**\n📞 (11) 3298-5400\n📧 corregedoria@oabsp.org.br\n📍 Rua Maria Paula, 35 - 4º andar\n\n**Código de Ética:**\nDisponível em: oabsp.org.br/etica"
+                response: `CORREGEDORIA GERAL DA OAB SP
+
+Atribuições institucionais:
+— Processamento de representações éticas contra advogados
+— Instauração e julgamento de sindicâncias
+— Orientação sobre conduta profissional
+— Fiscalização do exercício da advocacia
+
+Procedimento para denúncia:
+1. Acesse o Portal da Advocacia
+2. Navegue até: Serviços > Corregedoria > Denúncia
+3. Preencha o formulário eletrônico
+4. Anexe documentos comprobatórios
+
+Estatística:
+A OAB SP processa mais de 20.000 procedimentos éticos anualmente, mantendo a mais rigorosa fiscalização do exercício profissional.
+
+Contato:
+Telefone: (11) 3298-5400
+E-mail: corregedoria@oabsp.org.br
+Endereço: Rua Maria Paula, 35 - 4º andar
+
+Legislação aplicável:
+Código de Ética e Disciplina da OAB
+Disponível em: oabsp.org.br/etica`
             },
-            
-            // PRESIDENTE
             "presidente": {
                 keywords: ["presidente", "patricia vanzolini", "diretoria", "gestao"],
-                response: "👩‍⚖️ **Presidente da OAB SP**\n\n**Patricia Vanzolini**\n- 1ª Mulher Presidente da história da OAB SP\n- Gestão: 2022-2025\n- OAB/SP: 123.456\n\n**Biografia:**\nAdvogada especialista em Direito do Trabalho e Processo do Trabalho. Foi conselheira federal pela OAB SP e coordenou diversas comissões.\n\n**Diretoria 2022-2025:**\n- Vice-presidente: Dr. [Nome]\n- Secretário-geral: Dr. [Nome]\n- Tesoureiro: Dr. [Nome]\n\n**Principais Bandeiras:**\n- Modernização da advocacia\n- Acesso à Justiça\n- Direitos das mulheres\n- Sustentabilidade\n\n**Contato da Presidência:**\npresidencia@oabsp.org.br"
+                response: `PRESIDÊNCIA DA OAB SP
+
+Presidente: Patricia Vanzolini
+— Primeira mulher a presidir a OAB SP em toda a história da instituição
+— Gestão: 2022-2025
+— Inscrição OAB/SP: 123.456
+
+Formação e trajetória:
+Advogada especialista em Direito do Trabalho e Processo do Trabalho. Foi conselheira federal pela OAB SP e coordenou diversas comissões temáticas antes de sua eleição para a presidência.
+
+Diretoria 2022-2025:
+— Vice-presidente: Dr. [Nome]
+— Secretário-geral: Dr. [Nome]
+— Tesoureiro: Dr. [Nome]
+
+Principais bandeiras de gestão:
+— Modernização da advocacia paulista
+— Amplo acesso à Justiça
+— Defesa dos direitos das mulheres advogadas
+— Sustentabilidade institucional
+
+Contato da presidência:
+E-mail: presidencia@oabsp.org.br`
             },
-            
-            // DEFAULT
             "default": {
-                response: "Olá! Sou a Dra. Themis, especialista em TODO o site da OAB SP. Posso ajudar com:\n\n📋 **Serviços:** Inscrição, carteira, certidões, transferências\n💰 **Financeiro:** Anuidades, PREC, precatórios\n👥 **Comissões:** 40+ comissões temáticas\n🎓 **ESA:** Cursos, pós, MBA, eventos\n❤️ **CAASP:** Benefícios, saúde, odonto, previdência\n⚖️ **Prerrogativas:** Direitos do advogado\n🏢 **Subseções:** 325 unidades\n📅 **Eventos:** ENJA, conferências, outorgas\n📚 **Biblioteca:** Pesquisa jurídica\n📞 **Ouvidoria:** Reclamações e sugestões\n\n**Como posso ajudar você hoje?**"
+                response: `Prezado Dr.,
+
+Sou o assistente virtual especializado da OAB SP, com acesso integral à base de conhecimento institucional. Posso auxiliar nas seguintes áreas:
+
+Inscrição e Regularidade:
+— Primeira inscrição, segunda via de carteira, transferência de subseção
+— Anuidades, taxas e parcelamentos
+
+Certidões e Documentação:
+— Certidões de inscrição, regularidade, débitos e negativa
+
+Sistema PREC:
+— Consulta de precatórios, agendamento de recebimento
+
+Comissões Temáticas:
+— Mais de 40 comissões especializadas e processo de participação
+
+ESA - Escola Superior de Advocacia:
+— Cursos, MBA, pós-graduações e eventos científicos
+
+CAASP - Benefícios:
+— Assistência médica, odontológica, farmácia, seguros e previdência
+
+Prerrogativas Profissionais:
+— Direitos e garantias do advogado (Estatuto da Advocacia)
+
+Subseções:
+— Localização das 325 unidades da OAB SP
+
+Eventos Institucionais:
+— ENJA, conferências, outorgas de carteiras
+
+Biblioteca e Pesquisa:
+— Acervo, bases de dados e consultas jurídicas
+
+Ouvidoria e Corregedoria:
+— Canais de atendimento e procedimentos
+
+Como posso ser útil em sua consulta?`
             }
         };
 
-        // FAQ List
+        // FAQ List - Professional
         const faqList = [
             "Como solicitar segunda via da carteira OAB?",
             "Qual o prazo para pagamento de anuidade?",
@@ -593,13 +1189,13 @@
         // Populate FAQ
         function populateFAQ() {
             const container = document.getElementById('faqList');
-            faqList.forEach(question => {
+            faqList.forEach((question, index) => {
                 const btn = document.createElement('button');
-                btn.className = 'w-full text-left p-4 rounded-lg bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-oab-navy transition group';
+                btn.className = 'w-full text-left p-3 text-sm text-oab-muted hover:text-oab-primary hover:bg-oab-light rounded-sm transition border-l-2 border-transparent hover:border-oab-accent';
                 btn.onclick = () => askQuestion(question);
                 btn.innerHTML = `
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-oab-navy">${question}</span>
-                    <i class="fas fa-chevron-right float-right text-gray-400 group-hover:text-oab-navy mt-1"></i>
+                    <span class="font-medium">${question}</span>
+                    <i class="fas fa-chevron-right float-right mt-1 text-xs opacity-50"></i>
                 `;
                 container.appendChild(btn);
             });
@@ -627,14 +1223,14 @@
             
             if (matches.length > 0) {
                 resultsDiv.innerHTML = matches.map(m => `
-                    <div class="p-3 bg-blue-50 rounded-lg mb-2 cursor-pointer hover:bg-blue-100 transition" onclick="askQuestion('${m.data.keywords[0]}')">
-                        <p class="font-semibold text-oab-dark text-sm">${m.key.replace(/_/g, ' ').toUpperCase()}</p>
-                        <p class="text-xs text-gray-600 mt-1">${m.data.keywords.slice(0, 3).join(', ')}...</p>
+                    <div class="p-3 bg-oab-light rounded-sm mb-2 cursor-pointer hover:bg-gray-100 transition border-l-2 border-oab-accent" onclick="askQuestion('${m.data.keywords[0]}')">
+                        <p class="font-semibold text-oab-primary text-sm uppercase">${m.key.replace(/_/g, ' ')}</p>
+                        <p class="text-xs text-oab-muted mt-1">${m.data.keywords.slice(0, 4).join(', ')}...</p>
                     </div>
                 `).join('');
                 resultsDiv.classList.remove('hidden');
             } else {
-                resultsDiv.innerHTML = '<p class="text-sm text-gray-500">Nenhum resultado encontrado. Tente outra palavra-chave.</p>';
+                resultsDiv.innerHTML = '<p class="text-sm text-oab-muted">Nenhum resultado encontrado. Tente termos como "anuidade", "carteira", "curso", "comissão".</p>';
                 resultsDiv.classList.remove('hidden');
             }
         }
@@ -650,17 +1246,55 @@
                 }
             }
             
-            // Check for specific topics
             if (lowerQ.includes('mais detalhes')) {
-                return "Para informações mais detalhadas:\n\n1. 💻 Acesse: oabsp.org.br\n2. 📞 Central: 0800-770-5555\n3. 📧 E-mail: atendimento@oabsp.org.br\n4. 🏢 Presencial: Rua Maria Paula, 35 - Bela Vista\n\nPosso ajudar com mais alguma informação específica?";
+                return `Para informações complementares:
+
+Central de Atendimento OAB SP:
+— Telefone: 0800-770-5555 (ligação gratuita)
+— E-mail: atendimento@oabsp.org.br
+— Site: oabsp.org.br
+
+Atendimento presencial:
+— Endereço: Rua Maria Paula, 35 - Bela Vista, São Paulo/SP
+— Horário: segunda a sexta-feira, 9h às 18h
+
+Posso auxiliar em mais alguma consulta específica?`;
             }
             
             if (lowerQ.includes('onde acesso') || lowerQ.includes('onde')) {
-                return "📍 **Acesso aos serviços:**\n\n💻 **Online:** portal.oabsp.org.br\n📱 **App:** OAB SP (iOS/Android)\n🏢 **Presencial:** Rua Maria Paula, 35 - Bela Vista\n📞 **Telefone:** (11) 3298-5000 / 0800-770-5555\n\n⏰ **Horário:** Seg-Sex, 9h às 18h";
+                return `Canais de acesso aos serviços OAB SP:
+
+Plataforma digital:
+— Portal da Advocacia: portal.oabsp.org.br
+— Aplicativo OAB SP (disponível para iOS e Android)
+
+Atendimento presencial:
+— Sede institucional: Rua Maria Paula, 35 - Bela Vista
+— 325 subseções no estado de São Paulo
+
+Atendimento telefônico:
+— 0800-770-5555 (ligação gratuita)
+— (11) 3298-5000 (capital)
+
+Horário de atendimento: segunda a sexta-feira, 9h às 18h.`;
             }
             
             if (lowerQ.includes('telefone') || lowerQ.includes('contato')) {
-                return "📞 **Contatos OAB SP:**\n\n**Central de Atendimento:**\n0800-770-5555 (ligação gratuita)\n(11) 3298-5000 (SP capital)\n\n**Whatsapp:** (11) 3298-5000\n\n**Endereço:**\nRua Maria Paula, 35 - Bela Vista\nSão Paulo/SP - CEP 01019-040\n\n⏰ Atendimento: Seg-Sex, 9h às 18h";
+                return `CONTATOS INSTITUCIONAIS OAB SP
+
+Central de Atendimento:
+— 0800-770-5555 (ligação gratuita)
+— (11) 3298-5000 (São Paulo capital)
+
+WhatsApp institucional:
+— (11) 3298-5000
+
+Endereço:
+— Rua Maria Paula, 35 - Bela Vista
+— São Paulo/SP - CEP 01019-040
+
+Horário de funcionamento:
+— Segunda a sexta-feira: 9h às 18h`;
             }
             
             return knowledgeBase.default.response;
@@ -671,28 +1305,29 @@
             inscricao: {
                 title: "Inscrição na OAB SP",
                 content: `
-                    <div class="space-y-4">
-                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-oab-navy">
-                            <h4 class="font-bold text-oab-dark mb-2">Documentos Necessários:</h4>
-                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-oab-light p-4 rounded-sm border-l-4 border-oab-primary">
+                            <h4 class="font-semibold text-oab-primary mb-2">Documentos Necessários</h4>
+                            <ul class="response-list">
                                 <li>Certidão de conclusão de curso de Direito</li>
-                                <li>RG e CPF (cópia e original)</li>
-                                <li>Comprovante de residência</li>
-                                <li>Foto 3x4 recente</li>
+                                <li>Documento de identidade (RG)</li>
+                                <li>Cadastro de Pessoa Física (CPF)</li>
+                                <li>Comprovante de residência atualizado</li>
+                                <li>Fotografia 3x4 recente</li>
                                 <li>Taxa de inscrição (GRU)</li>
                             </ul>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <button class="w-full py-3 bg-oab-dark text-white rounded-lg hover:bg-oab-navy transition">
-                                <i class="fas fa-file-upload mr-2"></i>Upload de Documentos
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <button class="w-full py-3 bg-oab-primary text-white rounded-sm hover:bg-oab-secondary transition font-medium">
+                                Upload de Documentos
                             </button>
-                            <button class="w-full py-3 gold-gradient text-oab-dark rounded-lg hover:shadow-lg transition font-semibold">
-                                <i class="fas fa-calendar-check mr-2"></i>Agendar Entrega
+                            <button class="w-full py-3 bg-oab-accent text-oab-primary rounded-sm hover:bg-yellow-500 transition font-medium">
+                                Agendar Entrega
                             </button>
                         </div>
-                        <div class="mt-4">
-                            <h4 class="font-bold text-oab-dark mb-2">Subseções Disponíveis (325):</h4>
-                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-oab-navy">
+                        <div>
+                            <h4 class="font-semibold text-oab-primary mb-2">Subseções Disponíveis (325 unidades)</h4>
+                            <select class="ms-input">
                                 <option>Selecione sua subseção...</option>
                                 <option>São Paulo (Capital) - Sede</option>
                                 <option>Santo André</option>
@@ -702,9 +1337,7 @@
                                 <option>Guarulhos</option>
                                 <option>Campinas</option>
                                 <option>Santos</option>
-                                <option>Ribeirão Preto</option>
-                                <option>São José do Rio Preto</option>
-                                <option>+ 315 outras subseções</option>
+                                <option>+ 317 outras subseções</option>
                             </select>
                         </div>
                     </div>
@@ -713,354 +1346,17 @@
             certidoes: {
                 title: "Certidões OAB SP",
                 content: `
-                    <div class="space-y-4">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-oab-gold cursor-pointer transition">
-                                <i class="fas fa-certificate text-oab-gold text-2xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Certidão de Inscrição</h5>
-                                <p class="text-xs text-gray-600 mt-1">Comprova regularidade na OAB SP</p>
-                            </div>
-                            <div class="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-oab-gold cursor-pointer transition">
-                                <i class="fas fa-check-circle text-green-600 text-2xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Certidão de Regularidade</h5>
-                                <p class="text-xs text-gray-600 mt-1">Sem débitos com a Ordem</p>
-                            </div>
-                            <div class="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-oab-gold cursor-pointer transition">
-                                <i class="fas fa-file-invoice text-oab-navy text-2xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Certidão de Débitos</h5>
-                                <p class="text-xs text-gray-600 mt-1">Situação financeira atual</p>
-                            </div>
-                            <div class="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-oab-gold cursor-pointer transition">
-                                <i class="fas fa-history text-purple-600 text-2xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Certidão Negativa</h5>
-                                <p class="text-xs text-gray-600 mt-1">Histórico de inscrição</p>
-                            </div>
-                        </div>
-                        <button class="w-full py-3 gold-gradient text-oab-dark rounded-lg hover:shadow-lg transition font-semibold">
-                            <i class="fas fa-download mr-2"></i>Solicitar Certidão Digital
-                        </button>
-                    </div>
-                `
-            },
-            prec: {
-                title: "Sistema PREC - Precatórios",
-                content: `
-                    <div class="space-y-4">
-                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
-                            <p class="text-sm text-yellow-800">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                O PREC (Programa de Regularização de Pagamentos) permite o recebimento de precatórios de forma agilizada.
-                            </p>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <p class="font-semibold text-oab-dark">Consultar Precatório</p>
-                                    <p class="text-xs text-gray-600">Verifique seu crédito disponível</p>
-                                </div>
-                                <button class="px-4 py-2 bg-oab-dark text-white rounded-lg text-sm hover:bg-oab-navy">
-                                    Consultar
-                                </button>
-                            </div>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <p class="font-semibold text-oab-dark">Agendar Recebimento</p>
-                                    <p class="text-xs text-gray-600">Escolha data para retirada</p>
-                                </div>
-                                <button class="px-4 py-2 bg-oab-dark text-white rounded-lg text-sm hover:bg-oab-navy">
-                                    Agendar
-                                </button>
-                            </div>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <p class="font-semibold text-oab-dark">Simulação de Pagamento</p>
-                                    <p class="text-xs text-gray-600">Calcule descontos e tributos</p>
-                                </div>
-                                <button class="px-4 py-2 bg-oab-dark text-white rounded-lg text-sm hover:bg-oab-navy">
-                                    Simular
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            comissoes: {
-                title: "Comissões da OAB SP",
-                content: `
-                    <div class="space-y-4">
-                        <p class="text-gray-700 text-sm">A OAB SP possui <strong>mais de 40 comissões temáticas</strong>. Participe!</p>
+                    <div class="space-y-4 text-sm">
                         <div class="grid md:grid-cols-2 gap-3">
-                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
-                                <i class="fas fa-shield-alt text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Direitos Humanos</span>
+                            <div class="bg-white border border-gray-200 rounded-sm p-4 hover:border-oab-accent cursor-pointer transition">
+                                <i class="fas fa-certificate text-oab-accent text-xl mb-2"></i>
+                                <h5 class="font-semibold text-oab-primary">Certidão de Inscrição</h5>
+                                <p class="text-xs text-oab-muted mt-1">Comprova regularidade na OAB SP</p>
                             </div>
-                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
-                                <i class="fas fa-laptop text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Direito Digital e LGPD</span>
+                            <div class="bg-white border border-gray-200 rounded-sm p-4 hover:border-oab-accent cursor-pointer transition">
+                                <i class="fas fa-check-circle text-green-600 text-xl mb-2"></i>
+                                <h5 class="font-semibold text-oab-primary">Certidão de Regularidade</h5>
+                                <p class="text-xs text-oab-muted mt-1">Sem débitos com a Ordem</p>
                             </div>
-                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
-                                <i class="fas fa-baby text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Infância e Juventude</span>
-                            </div>
-                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
-                                <i class="fas fa-building text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Direito Empresarial</span>
-                            </div>
-                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
-                                <i class="fas fa-leaf text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Meio Ambiente</span>
-                            </div>
-                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
-                                <i class="fas fa-gavel text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Prerrogativas</span>
-                            </div>
-                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
-                                <i class="fas fa-ellipsis-h text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">+ 34 outras comissões</span>
-                            </div>
-                        </div>
-                        <button class="w-full py-3 gold-gradient text-oab-dark rounded-lg hover:shadow-lg transition font-semibold">
-                            <i class="fas fa-user-plus mr-2"></i>Candidatar-se a Comissão
-                        </button>
-                    </div>
-                `
-            },
-            beneficios: {
-                title: "Benefícios CAASP",
-                content: `
-                    <div class="space-y-4">
-                        <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 rounded-lg">
-                            <h4 class="font-bold text-lg">CAASP - Caixa de Assistência</h4>
-                            <p class="text-sm text-blue-100">Benefícios exclusivos para advogados inscritos</p>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition">
-                                <i class="fas fa-heartbeat text-red-500 text-3xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Saúde</h5>
-                                <p class="text-xs text-gray-600 mt-1">Assistência médica e hospitalar</p>
-                            </div>
-                            <div class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition">
-                                <i class="fas fa-tooth text-blue-500 text-3xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Odontologia</h5>
-                                <p class="text-xs text-gray-600 mt-1">Plano odontológico completo</p>
-                            </div>
-                            <div class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition">
-                                <i class="fas fa-pills text-green-500 text-3xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Farmácia</h5>
-                                <p class="text-xs text-gray-600 mt-1">Descontos em medicamentos</p>
-                            </div>
-                            <div class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition">
-                                <i class="fas fa-umbrella text-purple-500 text-3xl mb-2"></i>
-                                <h5 class="font-bold text-oab-dark">Seguros</h5>
-                                <p class="text-xs text-gray-600 mt-1">Vida, RC Profissional e mais</p>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h5 class="font-bold text-oab-dark mb-2">Previdência Privada</h5>
-                            <p class="text-sm text-gray-600 mb-3">Plano de previdência complementar exclusivo para advogados.</p>
-                            <button class="text-oab-navy font-semibold text-sm hover:underline">Simular contribuição →</button>
-                        </div>
-                    </div>
-                `
-            },
-            esa: {
-                title: "ESA - Escola Superior de Advocacia",
-                content: `
-                    <div class="space-y-4">
-                        <div class="relative bg-oab-dark text-white p-6 rounded-lg overflow-hidden">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-oab-gold opacity-20 rounded-full -mr-16 -mt-16"></div>
-                            <h4 class="font-serif text-xl font-bold relative z-10">Cursos em Destaque</h4>
-                            <p class="text-sm text-gray-300 relative z-10">Especialização e aperfeiçoamento profissional</p>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-oab-gold">
-                                <div class="flex-1">
-                                    <h5 class="font-bold text-sm text-oab-dark">MBA em Direito Digital e LGPD</h5>
-                                    <p class="text-xs text-gray-600">Início: 15/05/2026 • 360h</p>
-                                </div>
-                                <button class="px-3 py-1 bg-oab-dark text-white text-xs rounded hover:bg-oab-navy">Inscrever</button>
-                            </div>
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-oab-navy">
-                                <div class="flex-1">
-                                    <h5 class="font-bold text-sm text-oab-dark">Curso de Processo Civil Avançado</h5>
-                                    <p class="text-xs text-gray-600">Início: 20/05/2026 • 120h</p>
-                                </div>
-                                <button class="px-3 py-1 bg-oab-dark text-white text-xs rounded hover:bg-oab-navy">Inscrever</button>
-                            </div>
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-green-600">
-                                <div class="flex-1">
-                                    <h5 class="font-bold text-sm text-oab-dark">Workshop: Tributação em Cryptomoedas</h5>
-                                    <p class="text-xs text-gray-600">Data: 10/05/2026 • 8h</p>
-                                </div>
-                                <button class="px-3 py-1 bg-oab-dark text-white text-xs rounded hover:bg-oab-navy">Inscrever</button>
-                            </div>
-                        </div>
-                        <button class="w-full py-3 gold-gradient text-oab-dark rounded-lg hover:shadow-lg transition font-semibold">
-                            <i class="fas fa-graduation-cap mr-2"></i>Ver Todos os Cursos
-                        </button>
-                    </div>
-                `
-            }
-        };
-
-        // Functions
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
-
-        function toggleChat() {
-            const modal = document.getElementById('chatModal');
-            modal.classList.toggle('hidden');
-            modal.classList.toggle('flex');
-            if (!modal.classList.contains('hidden')) {
-                document.getElementById('chatInput').focus();
-            }
-        }
-
-        function openChat() {
-            const modal = document.getElementById('chatModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.getElementById('chatInput').focus();
-        }
-
-        function showServiceDetail(service) {
-            const modal = document.getElementById('serviceModal');
-            const title = document.getElementById('serviceTitle');
-            const content = document.getElementById('serviceContent');
-            
-            title.textContent = serviceDetails[service].title;
-            content.innerHTML = serviceDetails[service].content;
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeServiceModal() {
-            const modal = document.getElementById('serviceModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function askQuestion(question) {
-            const responseDiv = document.getElementById('quickResponse');
-            
-            responseDiv.innerHTML = `
-                <div class="typing-indicator flex space-x-1 justify-center">
-                    <span class="w-2 h-2 bg-oab-navy rounded-full"></span>
-                    <span class="w-2 h-2 bg-oab-navy rounded-full"></span>
-                    <span class="w-2 h-2 bg-oab-navy rounded-full"></span>
-                </div>
-                <p class="text-sm text-gray-500 mt-2 text-center">Dra. Themis está consultando...</p>
-            `;
-            
-            setTimeout(() => {
-                const answer = getAIResponse(question);
-                responseDiv.innerHTML = `
-                    <div class="text-left w-full">
-                        <div class="flex items-center mb-3">
-                            <div class="w-8 h-8 bg-oab-navy rounded-full flex items-center justify-center mr-2">
-                                <i class="fas fa-robot text-white text-xs"></i>
-                            </div>
-                            <span class="font-bold text-oab-dark text-sm">Dra. Themis</span>
-                        </div>
-                        <div class="bg-blue-50 p-4 rounded-lg text-sm text-gray-700 whitespace-pre-line border-l-4 border-oab-navy">
-                            ${answer}
-                        </div>
-                        <div class="mt-4 flex gap-2 flex-wrap">
-                            <button onclick="askQuestion('Mais detalhes')" class="text-xs px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition">Mais detalhes</button>
-                            <button onclick="askQuestion('Onde acesso isso?')" class="text-xs px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition">Onde acesso?</button>
-                            <button onclick="askQuestion('Telefone')" class="text-xs px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition">Telefone</button>
-                        </div>
-                    </div>
-                `;
-            }, 1500);
-        }
-
-        function askCustomQuestion() {
-            const input = document.getElementById('customQuestion');
-            if (input.value.trim()) {
-                askQuestion(input.value);
-                input.value = '';
-            }
-        }
-
-        function handleChatKeypress(event) {
-            if (event.key === 'Enter') {
-                sendChatMessage();
-            }
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const messages = document.getElementById('chatMessages');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            
-            const userMsg = document.createElement('div');
-            userMsg.className = 'chat-message flex items-start space-x-2 justify-end';
-            userMsg.innerHTML = `
-                <div class="bg-oab-navy p-3 rounded-lg rounded-tr-none shadow-sm max-w-[80%] text-sm text-white">
-                    <p>${text}</p>
-                </div>
-                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-user text-gray-600 text-xs"></i>
-                </div>
-            `;
-            messages.appendChild(userMsg);
-            
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-            
-            setTimeout(() => {
-                const typing = document.createElement('div');
-                typing.id = 'typing';
-                typing.className = 'chat-message flex items-start space-x-2';
-                typing.innerHTML = `
-                    <div class="w-8 h-8 bg-oab-navy rounded-full flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-robot text-white text-xs"></i>
-                    </div>
-                    <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm">
-                        <div class="typing-indicator flex space-x-1">
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                        </div>
-                    </div>
-                `;
-                messages.appendChild(typing);
-                messages.scrollTop = messages.scrollHeight;
-                
-                setTimeout(() => {
-                    typing.remove();
-                    const answer = getAIResponse(text);
-                    const aiMsg = document.createElement('div');
-                    aiMsg.className = 'chat-message flex items-start space-x-2';
-                    aiMsg.innerHTML = `
-                        <div class="w-8 h-8 bg-oab-navy rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-robot text-white text-xs"></i>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-[80%] text-sm text-gray-800">
-                            <p class="whitespace-pre-line">${answer}</p>
-                        </div>
-                    `;
-                    messages.appendChild(aiMsg);
-                    messages.scrollTop = messages.scrollHeight;
-                }, 1500);
-            }, 500);
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('serviceModal');
-            if (event.target === modal) {
-                closeServiceModal();
-            }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', populateFAQ);
-    </script>
-</body>
-</html>
+                            <div class="bg-white border border-gray-200 rounded-sm p-4 hover:border-oab-accent cursor-pointer transition">
+                                <i class="
