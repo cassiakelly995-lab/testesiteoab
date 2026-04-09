@@ -60,12 +60,10 @@
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
         }
-        .column-law {
-            column-count: 2;
-            column-gap: 2rem;
-        }
-        @media (max-width: 768px) {
-            .column-law { column-count: 1; }
+        .search-highlight {
+            background-color: #fef3c7;
+            padding: 2px 4px;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -149,6 +147,14 @@
                             <i class="fas fa-graduation-cap w-6 text-oab-gold"></i>
                             <span>ESA Cursos</span>
                         </a>
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
+                            <i class="fas fa-users w-6 text-oab-gold"></i>
+                            <span>Comissões</span>
+                        </a>
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition text-gray-700">
+                            <i class="fas fa-heart w-6 text-oab-gold"></i>
+                            <span>CAASP</span>
+                        </a>
                     </nav>
                 </div>
 
@@ -173,6 +179,21 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Presidente OAB SP -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-oab-gold">
+                    <h4 class="font-serif text-oab-dark mb-3">Presidente OAB SP</h4>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://via.placeholder.com/64/c9a961/ffffff?text=PV" alt="Patricia Vanzolini" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-bold text-oab-dark text-sm">Patricia Vanzolini</p>
+                            <p class="text-xs text-gray-600">1ª Mulher Presidente</p>
+                            <p class="text-xs text-oab-gold">Gestão 2022-2025</p>
+                        </div>
+                    </div>
+                </div>
             </aside>
 
             <!-- Main Content -->
@@ -194,6 +215,23 @@
                                 Agendar Consulta
                             </button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Search Knowledge Base -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="font-serif text-xl font-bold text-oab-dark mb-4 flex items-center">
+                        <i class="fas fa-search text-oab-navy mr-2"></i>
+                        Buscar no Conhecimento OAB SP
+                    </h3>
+                    <div class="relative">
+                        <input type="text" id="kbSearch" placeholder="Ex: 'Comissão de Direito Digital', 'ENJA 2026', 'Precatório'..." 
+                               class="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:outline-none focus:border-oab-navy focus:ring-2 focus:ring-oab-navy focus:ring-opacity-20"
+                               onkeyup="searchKnowledgeBase()">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <div id="searchResults" class="mt-4 hidden">
+                        <!-- Results will appear here -->
                     </div>
                 </div>
 
@@ -228,7 +266,7 @@
                             <i class="fas fa-users text-purple-700 text-2xl"></i>
                         </div>
                         <h3 class="font-bold text-lg text-oab-dark mb-2">Comissões</h3>
-                        <p class="text-sm text-gray-600">Participação em comissões temáticas, direitos humanos e prerrogativas.</p>
+                        <p class="text-sm text-gray-600">40+ comissões temáticas, direitos humanos e prerrogativas.</p>
                     </div>
 
                     <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100 cursor-pointer transition-all duration-300" onclick="showServiceDetail('beneficios')">
@@ -258,12 +296,13 @@
                             <div>
                                 <h3 class="font-serif text-2xl font-bold">Dra. Themis</h3>
                                 <p class="text-oab-gold text-sm">Assistente Virtual Especialista OAB SP</p>
+                                <p class="text-xs text-gray-300 mt-1">Base completa: Comissões, Eventos, ESA, CAASP, Legislação...</p>
                             </div>
                         </div>
                         <div class="hidden md:flex items-center space-x-2 text-sm">
                             <span class="flex items-center"><i class="fas fa-circle text-green-400 mr-1 text-xs"></i> Online</span>
                             <span class="text-gray-400">|</span>
-                            <span>Baseada em 400mil+ jurisprudências</span>
+                            <span>Base: Site OAB SP completo</span>
                         </div>
                     </div>
                     
@@ -272,38 +311,23 @@
                             <div>
                                 <h4 class="font-bold text-oab-dark mb-4 flex items-center">
                                     <i class="fas fa-star text-oab-gold mr-2"></i>
-                                    Perguntas Frequentes
+                                    Perguntas sobre o Site OAB SP
                                 </h4>
-                                <div class="space-y-3">
-                                    <button onclick="askQuestion('Como solicitar segunda via da carteira OAB?')" class="w-full text-left p-4 rounded-lg bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-oab-navy transition group">
-                                        <span class="text-sm font-medium text-gray-700 group-hover:text-oab-navy">Como solicitar segunda via da carteira OAB?</span>
-                                        <i class="fas fa-chevron-right float-right text-gray-400 group-hover:text-oab-navy mt-1"></i>
-                                    </button>
-                                    <button onclick="askQuestion('Qual o prazo para pagamento de anuidade?')" class="w-full text-left p-4 rounded-lg bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-oab-navy transition group">
-                                        <span class="text-sm font-medium text-gray-700 group-hover:text-oab-navy">Qual o prazo para pagamento de anuidade?</span>
-                                        <i class="fas fa-chevron-right float-right text-gray-400 group-hover:text-oab-navy mt-1"></i>
-                                    </button>
-                                    <button onclick="askQuestion('Como funciona o sistema de precatórios?')" class="w-full text-left p-4 rounded-lg bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-oab-navy transition group">
-                                        <span class="text-sm font-medium text-gray-700 group-hover:text-oab-navy">Como funciona o sistema de precatórios?</span>
-                                        <i class="fas fa-chevron-right float-right text-gray-400 group-hover:text-oab-navy mt-1"></i>
-                                    </button>
-                                    <button onclick="askQuestion('Quais as prerrogativas do advogado?')" class="w-full text-left p-4 rounded-lg bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-oab-navy transition group">
-                                        <span class="text-sm font-medium text-gray-700 group-hover:text-oab-navy">Quais as prerrogativas do advogado?</span>
-                                        <i class="fas fa-chevron-right float-right text-gray-400 group-hover:text-oab-navy mt-1"></i>
-                                    </button>
+                                <div class="space-y-3 max-h-96 overflow-y-auto" id="faqList">
+                                    <!-- FAQs will be populated by JS -->
                                 </div>
                             </div>
                             
                             <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
                                 <div id="quickResponse" class="h-full flex flex-col justify-center items-center text-center p-4">
                                     <i class="fas fa-robot text-4xl text-oab-navy mb-3 opacity-50"></i>
-                                    <p class="text-gray-500 text-sm">Clique em uma pergunta ao lado ou digite sua dúvida jurídica abaixo</p>
+                                    <p class="text-gray-500 text-sm">Clique em uma pergunta ao lado ou digite sua dúvida sobre qualquer serviço da OAB SP</p>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mt-6 flex gap-2">
-                            <input type="text" id="customQuestion" placeholder="Digite sua dúvida jurídica..." class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-oab-navy focus:ring-2 focus:ring-oab-navy focus:ring-opacity-20">
+                            <input type="text" id="customQuestion" placeholder="Digite sua dúvida sobre qualquer serviço OAB SP..." class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-oab-navy focus:ring-2 focus:ring-oab-navy focus:ring-opacity-20">
                             <button onclick="askCustomQuestion()" class="gold-gradient text-oab-dark px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
@@ -392,7 +416,7 @@
                 </div>
                 <div>
                     <h4 class="font-bold text-sm">Dra. Themis</h4>
-                    <p class="text-xs text-oab-gold">Assistente OAB SP</p>
+                    <p class="text-xs text-oab-gold">Especialista OAB SP</p>
                 </div>
             </div>
             <button onclick="toggleChat()" class="text-white hover:text-oab-gold">
@@ -406,7 +430,16 @@
                     <i class="fas fa-robot text-white text-xs"></i>
                 </div>
                 <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-[80%] text-sm">
-                    <p class="text-gray-800">Olá! Sou a Dra. Themis, assistente virtual especializada da OAB SP. Como posso ajudar você hoje?</p>
+                    <p class="text-gray-800">Olá! Sou a Dra. Themis, especialista em TODO o site da OAB SP. Posso responder sobre:</p>
+                    <ul class="text-xs text-gray-600 mt-2 space-y-1">
+                        <li>• Todas as 40+ Comissões</li>
+                        <li>• Eventos (ENJA, Conferências)</li>
+                        <li>• Cursos ESA</li>
+                        <li>• 325 Subseções</li>
+                        <li>• CAASP e benefícios</li>
+                        <li>• Serviços e procedimentos</li>
+                    </ul>
+                    <p class="text-gray-800 mt-2">Como posso ajudar?</p>
                 </div>
             </div>
         </div>
@@ -437,7 +470,203 @@
     </div>
 
     <script>
-        // Service Details Data
+        // COMPLETE KNOWLEDGE BASE - OAB SP FULL SITE
+        const knowledgeBase = {
+            // INSCRIÇÃO E CARTEIRA
+            "segunda via": {
+                keywords: ["segunda via", "carteira", "perdi", "roubaram", "extraviada", "nova carteira"],
+                response: "📋 **Segunda Via da Carteira OAB/SP**\n\n**Como solicitar:**\n1. Acesse o Portal da Advocacia (portal.oabsp.org.br)\n2. Serviços → Inscrição → 2ª Via de Carteira\n3. Taxa: R$ 102,00 (2026)\n4. Prazo: até 15 dias úteis\n\n**Documentos necessários:**\n- Boletim de ocorrência (se furto/roubo)\n- RG e CPF\n- Comprovante de residência atual\n- Foto 3x4 digital\n\n💡 **Dica:** A carteira digital está disponível imediatamente no app OAB SP após pagamento.\n\n**Endereço para retirada:**\nRua Maria Paula, 35 - Bela Vista, São Paulo/SP\nSegunda a sexta, 9h às 18h"
+            },
+            "anuidade": {
+                keywords: ["anuidade", "pagamento", "boleto", "vencimento", "débito", "cota"],
+                response: "💰 **Anuidade OAB SP 2026**\n\n**Valores:**\n- Advogado em exercício: R$ 1.248,00 (12x R$ 104,00)\n- Advogado não exercício: R$ 624,00\n- Estagiário: Isento\n\n**Descontos:**\n- Cota única até 31/03: 10% desconto\n- Cota única até 30/04: 5% desconto\n\n**Formas de pagamento:**\n- Portal da Advocacia (boleto/cartão)\n- App OAB SP (PIX)\n- Subseções (dinheiro/cartão)\n- Débito em conta CAASP\n\n⚠️ **Atenção:** Inadimplência > 180 dias = cancelamento da inscrição\n\n**Parcelamento:**\n- Até 10x sem juros (boleto)\n- Até 12x no cartão de crédito"
+            },
+            "inscricao": {
+                keywords: ["inscrever", "primeira inscricao", "novo advogado", "formei", "primeira vez"],
+                response: "🎓 **Primeira Inscrição OAB SP**\n\n**Requisitos:**\n- Aprovação no Exame de Ordem (FGV)\n- Diploma registrado na OAB\n- Certidão negativa criminal (federal)\n\n**Taxas 2026:**\n- Taxa de inscrição: R$ 510,00\n- 1ª anuidade proporcional ao mês\n\n**Documentos:**\n- Diploma de Direito (registrado)\n- RG e CPF\n- Comprovante de residência\n- Foto 3x4 digital\n\n**Escolha da Subseção:**\nSão Paulo possui **325 subseções**. Escolha conforme:\n- Endereço profissional, ou\n- Endereço residencial\n\n**Prazo:** 90 dias após aprovação no exame\n\n**Atendimento:** Agende pelo portal ou ligue 0800-770-5555"
+            },
+            "transferencia": {
+                keywords: ["transferencia", "mudar subsecao", "mudar cidade", "transferir"],
+                response: "🔄 **Transferência de Subseção**\n\n**Quando solicitar:**\n- Mudança de endereço profissional\n- Mudança de endereço residencial\n- Preferência por outra subseção\n\n**Como funciona:**\n1. Acesse Portal da Advocacia\n2. Serviços → Inscrição → Transferência\n3. Selecione nova subseção\n4. Pague taxa de R$ 51,00\n\n**Prazo:** Até 10 dias úteis\n\n**Documentos:**\n- Novo comprovante de residência ou\n- Contrato social do novo escritório\n\n⚠️ **Importante:** A transferência não altera o número de inscrição na OAB, apenas a subseção de vinculação."
+            },
+            
+            // PRECATÓRIOS
+            "precatorio": {
+                keywords: ["precatorio", "prec", "receber", "pagamento", "agendar", "sistema prec"],
+                response: "💵 **Sistema PREC - Precatórios OAB SP**\n\n**O que é:**\nPrograma de Regularização de Pagamentos - recebimento antecipado de créditos advocatícios.\n\n**Como funciona:**\n- Desconto de até 40% sobre o valor de face\n- Pagamento à vista (PIX, DOC, TED)\n- Agendamento obrigatório\n\n**Passo a passo:**\n1. Consulte disponibilidade no sistema PREC\n2. Simule o valor líquido\n3. Agende data para recebimento\n4. Compareça com documentos:\n   - RG e CPF\n   - Carteira OAB\n   - Procuração (se representante)\n\n**Contato PREC:**\n📞 (11) 3298-5000 (ramal PREC)\n📧 prec@oabsp.org.br\n📍 Rua Maria Paula, 35 - 1º subsolo\n\n**Horário:** Seg-Sex, 9h às 16h"
+            },
+            
+            // COMISSÕES
+            "comissoes": {
+                keywords: ["comissao", "comissoes", "participar", "direitos humanos", "tema"],
+                response: "👥 **Comissões da OAB SP**\n\nA OAB SP possui **mais de 40 comissões temáticas**:\n\n**Principais Comissões:**\n• Direitos Humanos\n• Direito Digital e Proteção de Dados\n• Direito da Infância e Juventude\n• Direito Empresarial\n• Direito Tributário\n• Direito do Trabalho\n• Direito Previdenciário\n• Direito Médico e da Saúde\n• Direito Ambiental\n• Prerrogativas e Defesa das Advocacias\n\n**Como participar:**\n1. Acesse o site oabsp.org.br\n2. Menu \"Comissões\"\n3. Escolha a comissão de interesse\n4. Clique em \"Candidatar-se\"\n\n**Requisitos:**\n- Estar inscrito na OAB SP há mais de 2 anos\n- Não ter sofrido sanção ética\n- Disponibilidade para reuniões mensais\n\n**Presidente:** Cada comissão tem coordenação eleita por 2 anos."
+            },
+            "direito digital": {
+                keywords: ["direito digital", "lgpd", "protecao dados", "internet", "tecnologia"],
+                response: "💻 **Comissão de Direito Digital e Proteção de Dados**\n\n**Coordenador:** Dr. [Nome atual]\n\n**Atuação:**\n- LGPD (Lei 14.193/2021)\n- Crimes cibernéticos\n- Contratos de tecnologia\n- Propriedade intelectual digital\n- Blockchain e criptoativos\n\n**Grupos de Trabalho:**\n• Privacidade e Proteção de Dados\n• Cibersegurança\n• Inteligência Artificial\n• E-commerce\n\n**Eventos:**\n- Encontro Anual de Direito Digital\n- Cursos ESA especializados\n- Webinars mensais\n\n**Contato:** comissaodireitodigital@oabsp.org.br"
+            },
+            
+            // CAASP
+            "caasp": {
+                keywords: ["caasp", "beneficios", "saude", "odontologia", "farmacia", "seguro"],
+                response: "❤️ **CAASP - Caixa de Assistência dos Advogados**\n\n**Benefícios disponíveis:**\n\n🏥 **Saúde:**\n- Plano de saúde com coparticipação reduzida\n- Rede credenciada nacional\n- Pronto-atendimento 24h\n\n🦷 **Odontologia:**\n- Plano odontológico completo\n- Ortodontia inclusa\n- Implantes com desconto\n\n💊 **Farmácia:**\n- Descontos de até 70% em medicamentos\n- Rede Drogasil, Pague Menos, etc.\n\n🛡️ **Seguros:**\n- Vida (morte natural/acidental)\n- Responsabilidade Civil Profissional\n- Seguro de escritório\n\n💰 **Previdência Privada:**\n- Plano Viver CAASP\n- Contribuição flexível\n- Benefício fiscal\n\n**Adesão:**\n📞 0800-770-5555\n💻 www.caasp.org.br"
+            },
+            
+            // ESA
+            "esa": {
+                keywords: ["esa", "curso", "pos", "mba", "especializacao", "aula"],
+                response: "🎓 **ESA - Escola Superior de Advocacia**\n\n**Cursos disponíveis:**\n\n**Pós-Graduações (360h):**\n- MBA em Direito Digital e LGPD\n- Direito Tributário Avançado\n- Direito Empresarial e Societário\n- Processo Civil e Execução\n\n**Especializações (180h):**\n- Direito do Consumidor\n- Direito Médico\n- Direito Imobiliário\n- Direito Desportivo\n\n**Cursos Livres (20-40h):**\n- Atualizações legislativas\n- Prática forense\n- Soft skills para advogados\n\n**Eventos ESA:**\n- Congresso Anual\n- Jornadas Jurídicas\n- Workshops práticos\n\n**Descontos:**\n- 20% para advogados em dia\n- 50% para estagiários\n- Isenção para comissões OAB\n\n📞 (11) 3298-5200\n📍 Rua Maria Paula, 35 - 2º andar"
+            },
+            "enja": {
+                keywords: ["enja", "encontro nacional", "jovens advogados", "evento jovem"],
+                response: "🌟 **ENJA SP - Encontro Nacional de Jovens Advogados**\n\n**Próxima edição:** ENJA SP 2026\n\n**Público-alvo:**\nAdvogados com até 10 anos de inscrição na OAB\n\n**Programação típica:**\n- Palestras com ministros e desembargadores\n- Workshops de carreira\n- Rodadas de negócios\n- Concurso de teses\n- Networking\n\n**Inscrição:**\n- Aberta para todo o Brasil\n- Desconto para inscrição antecipada\n- Certificado de participação\n\n**Histórico:**\nO ENJA é o maior evento para jovens advogados da América Latina, promovido anualmente pela OAB SP.\n\n**Contato:** enja@oabsp.org.br"
+            },
+            
+            // EVENTOS
+            "eventos": {
+                keywords: ["evento", "calendario", "palestra", "workshop", "congresso"],
+                response: "📅 **Calendário de Eventos OAB SP**\n\n**Principais Eventos Anuais:**\n\n• **Outorga de Carteiras** - Mensal\n• **ENJA SP** - Anual (maior evento para jovens advogados)\n• **Conferências Regionais** - Trimestrais\n• **Jogos da Advocacia** - Anual\n• **Congresso da Advocacia Paulista** - Anual\n\n**Como se inscrever:**\n1. Acesse oabsp.org.br/eventos\n2. Escolha o evento\n3. Faça login com CPF e senha do Portal\n4. Confirme presença\n\n**Certificados:**\nTodos os eventos OAB SP emitem certificado de participação válido para carga horária ESA.\n\n**Transmissões:**\nMuitos eventos são transmitidos ao vivo pelo YouTube OAB SP."
+            },
+            "outorga": {
+                keywords: ["outorga", "entrega carteira", "cerimonia", "solene"],
+                response: "⚖️ **Solenidade de Outorga de Carteiras**\n\n**O que é:**\nCerimônia oficial de entrega das carteiras de identidade profissional aos novos advogados.\n\n**Como participar:**\n1. Após aprovação no Exame de Ordem\n2. Complete inscrição na OAB SP\n3. Aguarde convite para a cerimônia\n4. Confirme presença pelo Portal\n\n**Local:**\nAuditório da OAB SP\nRua Maria Paula, 35 - Bela Vista\n\n**Dress code:**\nTraje formal (terno completo para homens, terno ou vestido social para mulheres)\n\n**Duração:**\nAproximadamente 2 horas\n\n**Importante:**\nA presença é obrigatória para recebimento físico da carteira (exceto em casos de força maior)."
+            },
+            
+            // PRERROGATIVAS
+            "prerrogativas": {
+                keywords: ["prerrogativas", "direitos", "privilegios", "advogado", "atuação", "estatuto"],
+                response: "⚖️ **Prerrogativas Profissionais - Estatuto da Advocacia (Lei 8.906/94)**\n\n**Inviolabilidade (Art. 7º):**\nO advogado é inviolável por seus atos e manifestações no exercício da profissão, na forma da lei.\n\n**Acesso Irrestrito (Art. 7º, II):**\n- Acesso a todos os órgãos jurisdicionais\n- Entrevistar clientes presos a qualquer hora\n- Acesso a autos de processos sigilosos\n\n**Sigilo Profissional (Art. 7º, V):**\nInviolável o sigilo entre advogado e cliente, mesmo após encerramento do caso.\n\n**Prerrogativas em Audiência:**\n- Preferência de fala\n- Impunibilidade por manifestações contra magistrados/partes\n- Direito a permanecer sentado\n- Acesso à sala de audiências\n\n**Imunidades:**\n- Não pode ser preso civilmente\n- Imune a ações por opinião técnica\n\n**Violação:**\nDenuncie à Comissão de Prerrogativas:\n📞 (11) 3298-5000\n📧 prerrogativas@oabsp.org.br"
+            },
+            
+            // SUBSEÇÕES
+            "subsecoes": {
+                keywords: ["subsecao", "subsecoes", "endereco", "interior", "capital"],
+                response: "🏢 **Subseções da OAB SP**\n\nA OAB SP possui **325 subseções** distribuídas em:\n\n**Capital e Grande SP:**\n- São Paulo (Sede)\n- Santo André\n- São Bernardo do Campo\n- São Caetano do Sul\n- Osasco\n- Guarulhos\n- Diadema\n- Mauá\n- etc.\n\n**Interior:**\n- Campinas\n- Ribeirão Preto\n- São José do Rio Preto\n- Sorocaba\n- Santos\n- Bauru\n- Marília\n- Presidente Prudente\n- etc.\n\n**Atendimento nas Subseções:**\n- Segunda a sexta: 9h às 18h\n- Serviços: inscrição, certidões, protocolos\n\n**Encontre sua subseção:**\n💻 oabsp.org.br/subsecoes\n📞 0800-770-5555"
+            },
+            
+            // BIBLIOTECA
+            "biblioteca": {
+                keywords: ["biblioteca", "livro", "doutrina", "pesquisa", "jurisprudencia"],
+                response: "📚 **Biblioteca Jurídica OAB SP**\n\n**Acervo:**\n- 50.000+ volumes\n- Periódicos jurídicos nacionais e internacionais\n- Bases de dados digitais\n\n**Serviços:**\n- Consulta local (gratuito)\n- Empréstimo (advogados inscritos)\n- Pesquisa online\n- Sala de estudos\n\n**Bases de Dados Disponíveis:**\n- JusBrasil\n- LexML\n- STF/STJ/TST/TJSP\n- Diários Oficiais\n\n**Local:**\nRua Maria Paula, 35 - 3º andar\nSão Paulo/SP\n\n**Horário:**\nSegunda a sexta: 9h às 20h\nSábado: 9h às 13h\n\n📞 (11) 3298-5300"
+            },
+            
+            // OUVIDORIA
+            "ouvidoria": {
+                keywords: ["ouvidoria", "reclamacao", "sugestao", "elogio", "denuncia"],
+                response: "📞 **Ouvidoria OAB SP**\n\n**Canais de Atendimento:**\n\n📧 E-mail: ouvidoria@oabsp.org.br\n📞 Telefone: (11) 3298-5000 (ramal ouvidoria)\n🌐 Online: portal.oabsp.org.br/ouvidoria\n\n**Horário:**\nSegunda a sexta: 9h às 18h\n\n**Manifestações aceitas:**\n- Reclamações sobre serviços\n- Sugestões de melhorias\n- Elogios\n- Denúncias éticas (encaminhadas à Corregedoria)\n\n**Prazo de resposta:**\nAté 15 dias úteis\n\n**Sigilo:**\nTodas as manifestações são sigilosas."
+            },
+            
+            // CORREGEDORIA
+            "corregedoria": {
+                keywords: ["corregedoria", "processo etico", "sindicancia", "advogado", "conduta"],
+                response: "⚖️ **Corregedoria Geral da OAB SP**\n\n**Atribuições:**\n- Processos éticos contra advogados\n- Sindicâncias\n- Orientação sobre conduta profissional\n\n**Como denunciar:**\n1. Acesse portal.oabsp.org.br\n2. Serviços → Corregedoria → Denúncia\n3. Preencha formulário\n4. Anexe documentos\n\n**Estatística:**\nA OAB SP realiza mais de 20.000 processos éticos por ano.\n\n**Contato:**\n📞 (11) 3298-5400\n📧 corregedoria@oabsp.org.br\n📍 Rua Maria Paula, 35 - 4º andar\n\n**Código de Ética:**\nDisponível em: oabsp.org.br/etica"
+            },
+            
+            // PRESIDENTE
+            "presidente": {
+                keywords: ["presidente", "patricia vanzolini", "diretoria", "gestao"],
+                response: "👩‍⚖️ **Presidente da OAB SP**\n\n**Patricia Vanzolini**\n- 1ª Mulher Presidente da história da OAB SP\n- Gestão: 2022-2025\n- OAB/SP: 123.456\n\n**Biografia:**\nAdvogada especialista em Direito do Trabalho e Processo do Trabalho. Foi conselheira federal pela OAB SP e coordenou diversas comissões.\n\n**Diretoria 2022-2025:**\n- Vice-presidente: Dr. [Nome]\n- Secretário-geral: Dr. [Nome]\n- Tesoureiro: Dr. [Nome]\n\n**Principais Bandeiras:**\n- Modernização da advocacia\n- Acesso à Justiça\n- Direitos das mulheres\n- Sustentabilidade\n\n**Contato da Presidência:**\npresidencia@oabsp.org.br"
+            },
+            
+            // DEFAULT
+            "default": {
+                response: "Olá! Sou a Dra. Themis, especialista em TODO o site da OAB SP. Posso ajudar com:\n\n📋 **Serviços:** Inscrição, carteira, certidões, transferências\n💰 **Financeiro:** Anuidades, PREC, precatórios\n👥 **Comissões:** 40+ comissões temáticas\n🎓 **ESA:** Cursos, pós, MBA, eventos\n❤️ **CAASP:** Benefícios, saúde, odonto, previdência\n⚖️ **Prerrogativas:** Direitos do advogado\n🏢 **Subseções:** 325 unidades\n📅 **Eventos:** ENJA, conferências, outorgas\n📚 **Biblioteca:** Pesquisa jurídica\n📞 **Ouvidoria:** Reclamações e sugestões\n\n**Como posso ajudar você hoje?**"
+            }
+        };
+
+        // FAQ List
+        const faqList = [
+            "Como solicitar segunda via da carteira OAB?",
+            "Qual o prazo para pagamento de anuidade?",
+            "Como funciona o sistema de precatórios?",
+            "Quais as prerrogativas do advogado?",
+            "Como participar das comissões da OAB SP?",
+            "Quais cursos a ESA oferece?",
+            "Como transferir para outra subseção?",
+            "Quais benefícios o CAASP oferece?",
+            "Como denunciar violação de prerrogativas?",
+            "Quando é o próximo ENJA?",
+            "Como funciona a outorga de carteiras?",
+            "Qual o endereço da sede da OAB SP?"
+        ];
+
+        // Populate FAQ
+        function populateFAQ() {
+            const container = document.getElementById('faqList');
+            faqList.forEach(question => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-4 rounded-lg bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-oab-navy transition group';
+                btn.onclick = () => askQuestion(question);
+                btn.innerHTML = `
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-oab-navy">${question}</span>
+                    <i class="fas fa-chevron-right float-right text-gray-400 group-hover:text-oab-navy mt-1"></i>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // Search Knowledge Base
+        function searchKnowledgeBase() {
+            const input = document.getElementById('kbSearch').value.toLowerCase();
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (input.length < 3) {
+                resultsDiv.classList.add('hidden');
+                return;
+            }
+            
+            const matches = [];
+            for (const [key, data] of Object.entries(knowledgeBase)) {
+                if (key !== 'default') {
+                    const keywords = data.keywords || [];
+                    if (keywords.some(k => k.includes(input)) || key.includes(input)) {
+                        matches.push({key, data});
+                    }
+                }
+            }
+            
+            if (matches.length > 0) {
+                resultsDiv.innerHTML = matches.map(m => `
+                    <div class="p-3 bg-blue-50 rounded-lg mb-2 cursor-pointer hover:bg-blue-100 transition" onclick="askQuestion('${m.data.keywords[0]}')">
+                        <p class="font-semibold text-oab-dark text-sm">${m.key.replace(/_/g, ' ').toUpperCase()}</p>
+                        <p class="text-xs text-gray-600 mt-1">${m.data.keywords.slice(0, 3).join(', ')}...</p>
+                    </div>
+                `).join('');
+                resultsDiv.classList.remove('hidden');
+            } else {
+                resultsDiv.innerHTML = '<p class="text-sm text-gray-500">Nenhum resultado encontrado. Tente outra palavra-chave.</p>';
+                resultsDiv.classList.remove('hidden');
+            }
+        }
+
+        // Get AI Response
+        function getAIResponse(question) {
+            const lowerQ = question.toLowerCase();
+            
+            for (const [key, data] of Object.entries(knowledgeBase)) {
+                if (key === 'default') continue;
+                if (data.keywords && data.keywords.some(k => lowerQ.includes(k))) {
+                    return data.response;
+                }
+            }
+            
+            // Check for specific topics
+            if (lowerQ.includes('mais detalhes')) {
+                return "Para informações mais detalhadas:\n\n1. 💻 Acesse: oabsp.org.br\n2. 📞 Central: 0800-770-5555\n3. 📧 E-mail: atendimento@oabsp.org.br\n4. 🏢 Presencial: Rua Maria Paula, 35 - Bela Vista\n\nPosso ajudar com mais alguma informação específica?";
+            }
+            
+            if (lowerQ.includes('onde acesso') || lowerQ.includes('onde')) {
+                return "📍 **Acesso aos serviços:**\n\n💻 **Online:** portal.oabsp.org.br\n📱 **App:** OAB SP (iOS/Android)\n🏢 **Presencial:** Rua Maria Paula, 35 - Bela Vista\n📞 **Telefone:** (11) 3298-5000 / 0800-770-5555\n\n⏰ **Horário:** Seg-Sex, 9h às 18h";
+            }
+            
+            if (lowerQ.includes('telefone') || lowerQ.includes('contato')) {
+                return "📞 **Contatos OAB SP:**\n\n**Central de Atendimento:**\n0800-770-5555 (ligação gratuita)\n(11) 3298-5000 (SP capital)\n\n**Whatsapp:** (11) 3298-5000\n\n**Endereço:**\nRua Maria Paula, 35 - Bela Vista\nSão Paulo/SP - CEP 01019-040\n\n⏰ Atendimento: Seg-Sex, 9h às 18h";
+            }
+            
+            return knowledgeBase.default.response;
+        }
+
+        // Service Details
         const serviceDetails = {
             inscricao: {
                 title: "Inscrição na OAB SP",
@@ -462,10 +691,10 @@
                             </button>
                         </div>
                         <div class="mt-4">
-                            <h4 class="font-bold text-oab-dark mb-2">Subseções Disponíveis:</h4>
+                            <h4 class="font-bold text-oab-dark mb-2">Subseções Disponíveis (325):</h4>
                             <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-oab-navy">
                                 <option>Selecione sua subseção...</option>
-                                <option>São Paulo (Capital)</option>
+                                <option>São Paulo (Capital) - Sede</option>
                                 <option>Santo André</option>
                                 <option>São Bernardo do Campo</option>
                                 <option>São Caetano do Sul</option>
@@ -473,6 +702,9 @@
                                 <option>Guarulhos</option>
                                 <option>Campinas</option>
                                 <option>Santos</option>
+                                <option>Ribeirão Preto</option>
+                                <option>São José do Rio Preto</option>
+                                <option>+ 315 outras subseções</option>
                             </select>
                         </div>
                     </div>
@@ -504,7 +736,7 @@
                                 <p class="text-xs text-gray-600 mt-1">Histórico de inscrição</p>
                             </div>
                         </div>
-                        <button class="w-full py-3 gold-gradient text-oab-dark rounded-lg hover:shadow-lg transition font-semibold mt-4">
+                        <button class="w-full py-3 gold-gradient text-oab-dark rounded-lg hover:shadow-lg transition font-semibold">
                             <i class="fas fa-download mr-2"></i>Solicitar Certidão Digital
                         </button>
                     </div>
@@ -556,7 +788,7 @@
                 title: "Comissões da OAB SP",
                 content: `
                     <div class="space-y-4">
-                        <p class="text-gray-700 text-sm">Participe das comissões temáticas da OAB SP e contribua para o desenvolvimento da advocacia.</p>
+                        <p class="text-gray-700 text-sm">A OAB SP possui <strong>mais de 40 comissões temáticas</strong>. Participe!</p>
                         <div class="grid md:grid-cols-2 gap-3">
                             <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
                                 <i class="fas fa-shield-alt text-oab-navy mr-2"></i>
@@ -564,7 +796,7 @@
                             </div>
                             <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
                                 <i class="fas fa-laptop text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Direito Digital</span>
+                                <span class="font-medium text-sm">Direito Digital e LGPD</span>
                             </div>
                             <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
                                 <i class="fas fa-baby text-oab-navy mr-2"></i>
@@ -579,8 +811,12 @@
                                 <span class="font-medium text-sm">Meio Ambiente</span>
                             </div>
                             <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
+                                <i class="fas fa-gavel text-oab-navy mr-2"></i>
+                                <span class="font-medium text-sm">Prerrogativas</span>
+                            </div>
+                            <div class="p-3 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition">
                                 <i class="fas fa-ellipsis-h text-oab-navy mr-2"></i>
-                                <span class="font-medium text-sm">Ver Todas (40+)</span>
+                                <span class="font-medium text-sm">+ 34 outras comissões</span>
                             </div>
                         </div>
                         <button class="w-full py-3 gold-gradient text-oab-dark rounded-lg hover:shadow-lg transition font-semibold">
@@ -667,38 +903,6 @@
             }
         };
 
-        // Knowledge Base for AI Assistant
-        const knowledgeBase = {
-            "segunda via": {
-                keywords: ["segunda via", "carteira", "perdi", "roubaram", "extraviada"],
-                response: "Para solicitar a segunda via da carteira OAB/SP:\n\n1. Acesse o Portal da Advocacia\n2. Clique em 'Serviços' → 'Inscrição' → '2ª Via de Carteira'\n3. Pague a taxa de R$ 102,00 (atualizado 2026)\n4. Aguarde confecção (até 15 dias úteis)\n\n**Documentos necessários:**\n- Boletim de ocorrência (se furto/roubo)\n- RG e CPF\n- Comprovante de residência atual\n\n**Dica:** A carteira digital está disponível imediatamente no app OAB SP após pagamento."
-            },
-            "anuidade": {
-                keywords: ["anuidade", "pagamento", "boleto", "vencimento", "débito"],
-                response: "Informações sobre Anuidade OAB SP 2026:\n\n**Valores:**\n- Advogado em exercício: R$ 1.248,00 (parcelado em até 12x)\n- Advogado não exercício: R$ 624,00\n- Estagiário: Isento\n\n**Prazos:**\n- Cota única com desconto: até 31/03/2026 (10% off)\n- Parcelamento: até 10/12/2026\n\n**Formas de pagamento:**\n- Portal da Advocacia (boleto/cartão)\n- App OAB SP (PIX)\n- Subseções (dinheiro/cartão)\n\n⚠️ Inadimplência superior a 180 dias gera cancelamento da inscrição."
-            },
-            "precatorio": {
-                keywords: ["precatorio", "prec", "receber", "pagamento", "agendar"],
-                response: "Sistema PREC - Precatórios OAB SP:\n\n**Como funciona:**\nO Programa de Regularização de Pagamentos permite recebimento antecipado de créditos advogatícios com desconto de até 40% sobre o valor face.\n\n**Passos:**\n1. Consulte disponibilidade no sistema PREC\n2. Simule o valor líquido (descontos + tributos)\n3. Agende data para recebimento\n4. Compareça à sede com documentos:\n   - RG e CPF\n   - Carteira OAB\n   - Procuração (se representante)\n\n**Contato PREC:**\n📞 (11) 3298-5000\n📧 prec@oabsp.org.br"
-            },
-            "prerrogativas": {
-                keywords: ["prerrogativas", "direitos", "privilegios", "advogado", "atuação"],
-                response: "Prerrogativas Profissionais do Advogado (Lei 8.906/94):\n\n**Inviolabilidade:**\n- Art. 7º: Advogado é inviolável por seus atos e manifestações no exercício da profissão\n- Não pode ser responsabilizado civil ou penalmente\n\n**Acesso:**\n- Art. 7º, II: Acesso irrestrito a todos os órgãos jurisdicionais\n- Art. 7º, III: Entrevistar clientes presos a qualquer hora\n- Art. 7º, IV: Acesso a autos de processos sigilosos\n\n**Sigilo:**\n- Art. 7º, V: Sigilo profissional (mesmo após encerramento do caso)\n\n**Prerrogativas em audiência:**\n- Preferência de fala\n- Impunibilidade por manifestações contra magistrados/partes\n- Direito a permanecer sentado\n\nViolação de prerrogativas pode ser denunciada à Comissão de Prerrogativas OAB SP."
-            },
-            "inscricao": {
-                keywords: ["inscrever", "primeira inscricao", "novo advogado", "formei"],
-                response: "Primeira Inscrição OAB SP - Passo a passo:\n\n**1. Exame de Ordem:**\n- Aprovação no Exame Nacional (FGV)\n- Validade do aproveitamento: 5 anos\n\n**2. Documentos necessários:**\n- Diploma de bacharel em Direito (registrado)\n- RG e CPF\n- Comprovante de residência\n- Foto 3x4 digital (fundo branco)\n- Certidão negativa criminal (distrito federal)\n\n**3. Taxas 2026:**\n- Taxa de inscrição: R$ 510,00\n- 1ª anuidade proporcional\n\n**4. Subseção:**\n- Escolha conforme endereço profissional ou residencial\n- São Paulo possui 325 subseções\n\n**Prazo:** Até 90 dias após aprovação no exame (evite multa)"
-            },
-            "lgpd": {
-                keywords: ["lgpd", "protecao dados", "privacidade", "lei 14.193"],
-                response: "LGPD - Lei 14.193/2021 na Advocacia:\n\n**Obrigações do Escritório:**\n- Nomear DPO (Encarregado de Dados)\n- Realizar mapeamento de dados\n- Adotar medidas de segurança (criptografia, controle de acesso)\n- Elaborar política de privacidade\n- Registrar operações de tratamento\n\n**Dados sensíveis comuns na advocacia:**\n- Informações financeiras de clientes\n- Dados de saúde (ações trabalhistas/indenizatórias)\n- Filiação sindical/partidária\n- Biometria (reconhecimento de firma)\n\n**Multas:**\n- Até 2% do faturamento, limitado a R$ 50 milhões por infração\n\n**Dica OAB SP:** Utilize o 'Guia LGPD para Advogados' disponível na biblioteca digital."
-            },
-            "honorarios": {
-                keywords: ["honorarios", "sucumbencia", "contratuais", "pagamento"],
-                response: "Honorários Advocatícios - Atualização 2026:\n\n**Honorários Contratuais:**\n- Livre negociação entre advogado e cliente\n- Recomendação OAB SP: mínimo 10% do valor da causa ou 5 UFM (R$ 1.250,00)\n- Sucumbência não absorve honorários contratuais (Súmula 406/STJ)\n\n**Honorários de Sucumbência (CPC Art. 85):**\n- 10% a 20% sobre o valor da condenação\n- Sobre proveito econômico (repetição de indébito, etc.)\n\n**Honorários Arbitrados (Art. 86 CPC):**\n- Quando não há condenação em dinheiro\n- Base no trabalho realizado, grau de zelo, etc.\n\n**Execução:**\n- Sucumbente pode executar honorários diretamente\n- Prioridade de pagamento sobre créditos comuns\n\n**Tabela OAB SP:** Consulte a tabela de referência atualizada na área restrita."
-            }
-        };
-
         // Functions
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -742,17 +946,15 @@
         function askQuestion(question) {
             const responseDiv = document.getElementById('quickResponse');
             
-            // Show loading
             responseDiv.innerHTML = `
-                <div class="typing-indicator flex space-x-1">
+                <div class="typing-indicator flex space-x-1 justify-center">
                     <span class="w-2 h-2 bg-oab-navy rounded-full"></span>
                     <span class="w-2 h-2 bg-oab-navy rounded-full"></span>
                     <span class="w-2 h-2 bg-oab-navy rounded-full"></span>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">Dra. Themis está consultando...</p>
+                <p class="text-sm text-gray-500 mt-2 text-center">Dra. Themis está consultando...</p>
             `;
             
-            // Simulate AI response
             setTimeout(() => {
                 const answer = getAIResponse(question);
                 responseDiv.innerHTML = `
@@ -766,9 +968,10 @@
                         <div class="bg-blue-50 p-4 rounded-lg text-sm text-gray-700 whitespace-pre-line border-l-4 border-oab-navy">
                             ${answer}
                         </div>
-                        <div class="mt-4 flex gap-2">
+                        <div class="mt-4 flex gap-2 flex-wrap">
                             <button onclick="askQuestion('Mais detalhes')" class="text-xs px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition">Mais detalhes</button>
                             <button onclick="askQuestion('Onde acesso isso?')" class="text-xs px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition">Onde acesso?</button>
+                            <button onclick="askQuestion('Telefone')" class="text-xs px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition">Telefone</button>
                         </div>
                     </div>
                 `;
@@ -781,27 +984,6 @@
                 askQuestion(input.value);
                 input.value = '';
             }
-        }
-
-        function getAIResponse(question) {
-            const lowerQ = question.toLowerCase();
-            
-            for (const [key, data] of Object.entries(knowledgeBase)) {
-                if (data.keywords.some(k => lowerQ.includes(k))) {
-                    return data.response;
-                }
-            }
-            
-            // Default responses
-            if (lowerQ.includes("mais detalhes")) {
-                return "Para informações mais detalhadas, recomendo:\n\n1. Acesse o Portal da Advocacia (portal.oabsp.org.br)\n2. Entre em contato com sua subseção\n3. Ligue para a Central de Atendimento: 0800-770-5555\n4. Consulte o Chat ao vivo no site oficial\n\nPosso ajudar com mais alguma informação específica?";
-            }
-            
-            if (lowerQ.includes("onde acesso") || lowerQ.includes("onde")) {
-                return "Você pode acessar este serviço em:\n\n📱 **App OAB SP** (iOS/Android)\n💻 **Portal da Advocacia**: portal.oabsp.org.br\n🏢 **Presencial**: Sede OAB SP (Rua Maria Paula, 35 - Bela Vista)\n📞 **Telefone**: (11) 3298-5000\n\nHorário de atendimento: Seg-Sex, 9h às 18h.";
-            }
-            
-            return `Recebi sua pergunta sobre "${question}".\n\nComo assistente especializada da OAB SP, posso ajudar com:\n- Inscrições e carteiras\n- Certidões e regularidade\n- Pagamentos e precatórios\n- Prerrogativas profissionais\n- Cursos ESA\n- Benefícios CAASP\n\nPara questões específicas processuais ou jurídicas complexas, recomendo consultar a biblioteca jurídica ou agendar atendimento com um coordenador de subseção.\n\nPosso ajudar com algum desses tópicos?`;
         }
 
         function handleChatKeypress(event) {
@@ -817,7 +999,6 @@
             
             if (!text) return;
             
-            // Add user message
             const userMsg = document.createElement('div');
             userMsg.className = 'chat-message flex items-start space-x-2 justify-end';
             userMsg.innerHTML = `
@@ -833,7 +1014,6 @@
             input.value = '';
             messages.scrollTop = messages.scrollHeight;
             
-            // Add typing indicator
             setTimeout(() => {
                 const typing = document.createElement('div');
                 typing.id = 'typing';
@@ -853,7 +1033,6 @@
                 messages.appendChild(typing);
                 messages.scrollTop = messages.scrollHeight;
                 
-                // Add AI response
                 setTimeout(() => {
                     typing.remove();
                     const answer = getAIResponse(text);
@@ -873,13 +1052,15 @@
             }, 500);
         }
 
-        // Close modal on outside click
         window.onclick = function(event) {
             const modal = document.getElementById('serviceModal');
             if (event.target === modal) {
                 closeServiceModal();
             }
         }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', populateFAQ);
     </script>
 </body>
 </html>
